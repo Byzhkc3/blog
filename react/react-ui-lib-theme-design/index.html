@@ -1,0 +1,382 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"/><meta http-equiv="x-ua-compatible" content="ie=edge"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="preload" href="/blog/component---src-layouts-index-js-58b31e5739a45f38ba88.js" as="script"/><link rel="preload" href="/blog/component---src-templates-blog-post-js-443b4e797689934d1548.js" as="script"/><link rel="preload" href="/blog/path---react-react-ui-lib-theme-design-d78f49cd86b9008f0e7a.js" as="script"/><link rel="preload" href="/blog/app-9f208c8e93b5ff271c6e.js" as="script"/><link rel="preload" href="/blog/commons-3cf304937523a964e309.js" as="script"/><link rel="alternate" type="application/rss+xml" href="/rss.xml"/><title data-react-helmet="true">React组件库主题设计 | Whinc Blog</title><style id="typography.js">html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}article,aside,details,figcaption,figure,footer,header,main,menu,nav,section,summary{display:block}audio,canvas,progress,video{display:inline-block}audio:not([controls]){display:none;height:0}progress{vertical-align:baseline}[hidden],template{display:none}a{background-color:transparent;-webkit-text-decoration-skip:objects}a:active,a:hover{outline-width:0}abbr[title]{border-bottom:none;text-decoration:underline;text-decoration:underline dotted}b,strong{font-weight:inherit;font-weight:bolder}dfn{font-style:italic}h1{font-size:2em;margin:.67em 0}mark{background-color:#ff0;color:#000}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}img{border-style:none}svg:not(:root){overflow:hidden}code,kbd,pre,samp{font-family:monospace,monospace;font-size:1em}figure{margin:1em 40px}hr{box-sizing:content-box;height:0;overflow:visible}button,input,optgroup,select,textarea{font:inherit;margin:0}optgroup{font-weight:700}button,input{overflow:visible}button,select{text-transform:none}[type=reset],[type=submit],button,html [type=button]{-webkit-appearance:button}[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner,button::-moz-focus-inner{border-style:none;padding:0}[type=button]:-moz-focusring,[type=reset]:-moz-focusring,[type=submit]:-moz-focusring,button:-moz-focusring{outline:1px dotted ButtonText}fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em}legend{box-sizing:border-box;color:inherit;display:table;max-width:100%;padding:0;white-space:normal}textarea{overflow:auto}[type=checkbox],[type=radio]{box-sizing:border-box;padding:0}[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}[type=search]::-webkit-search-cancel-button,[type=search]::-webkit-search-decoration{-webkit-appearance:none}::-webkit-input-placeholder{color:inherit;opacity:.54}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}html{font:100%/1.75em 'Merriweather','Georgia',serif;box-sizing:border-box;overflow-y:scroll;}*{box-sizing:inherit;}*:before{box-sizing:inherit;}*:after{box-sizing:inherit;}body{color:hsla(0,0%,0%,0.9);font-family:'Merriweather','Georgia',serif;font-weight:400;word-wrap:break-word;font-kerning:normal;-moz-font-feature-settings:"kern", "liga", "clig", "calt";-ms-font-feature-settings:"kern", "liga", "clig", "calt";-webkit-font-feature-settings:"kern", "liga", "clig", "calt";font-feature-settings:"kern", "liga", "clig", "calt";}img{max-width:100%;margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;}h1{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;color:inherit;font-family:Montserrat,sans-serif;font-weight:900;text-rendering:optimizeLegibility;font-size:2.5rem;line-height:1.1;}h2{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;color:inherit;font-family:'Merriweather','Georgia',serif;font-weight:900;text-rendering:optimizeLegibility;font-size:1.73286rem;line-height:1.1;}h3{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;color:inherit;font-family:'Merriweather','Georgia',serif;font-weight:900;text-rendering:optimizeLegibility;font-size:1.4427rem;line-height:1.1;}h4{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;color:inherit;font-family:'Merriweather','Georgia',serif;font-weight:900;text-rendering:optimizeLegibility;font-size:1rem;line-height:1.1;letter-spacing:0.140625em;text-transform:uppercase;}h5{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;color:inherit;font-family:'Merriweather','Georgia',serif;font-weight:900;text-rendering:optimizeLegibility;font-size:0.83255rem;line-height:1.1;}h6{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;color:inherit;font-family:'Merriweather','Georgia',serif;font-weight:900;text-rendering:optimizeLegibility;font-size:0.75966rem;line-height:1.1;font-style:italic;}hgroup{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;}ul{margin-left:1.75rem;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;list-style-position:outside;list-style-image:none;list-style:disc;}ol{margin-left:1.75rem;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;list-style-position:outside;list-style-image:none;}dl{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;}dd{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;}p{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;}figure{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;}pre{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;font-size:0.85rem;line-height:1.75rem;}table{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;font-size:1rem;line-height:1.75rem;border-collapse:collapse;width:100%;}fieldset{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;}blockquote{margin-left:-1.75rem;margin-right:1.75rem;margin-top:0;padding-bottom:0;padding-left:1.42188rem;padding-right:0;padding-top:0;margin-bottom:1.75rem;font-size:1.20112rem;line-height:1.75rem;color:hsla(0,0%,0%,0.59);font-style:italic;border-left:0.32813rem solid hsla(0,0%,0%,0.9);}form{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;}noscript{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;}iframe{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;}hr{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:calc(1.75rem - 1px);background:hsla(0,0%,0%,0.2);border:none;height:1px;}address{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;}b{font-weight:700;}strong{font-weight:700;}dt{font-weight:700;}th{font-weight:700;}li{margin-bottom:calc(1.75rem / 2);}ol li{padding-left:0;}ul li{padding-left:0;}li > ol{margin-left:1.75rem;margin-bottom:calc(1.75rem / 2);margin-top:calc(1.75rem / 2);}li > ul{margin-left:1.75rem;margin-bottom:calc(1.75rem / 2);margin-top:calc(1.75rem / 2);}blockquote *:last-child{margin-bottom:0;}li *:last-child{margin-bottom:0;}p *:last-child{margin-bottom:0;}li > p{margin-bottom:calc(1.75rem / 2);}code{font-size:0.85rem;line-height:1.75rem;}kbd{font-size:0.85rem;line-height:1.75rem;}samp{font-size:0.85rem;line-height:1.75rem;}abbr{border-bottom:1px dotted hsla(0,0%,0%,0.5);cursor:help;}acronym{border-bottom:1px dotted hsla(0,0%,0%,0.5);cursor:help;}abbr[title]{border-bottom:1px dotted hsla(0,0%,0%,0.5);cursor:help;text-decoration:none;}thead{text-align:left;}td,th{text-align:left;border-bottom:1px solid hsla(0,0%,0%,0.12);font-feature-settings:"tnum";-moz-font-feature-settings:"tnum";-ms-font-feature-settings:"tnum";-webkit-font-feature-settings:"tnum";padding-left:1.16667rem;padding-right:1.16667rem;padding-top:0.875rem;padding-bottom:calc(0.875rem - 1px);}th:first-child,td:first-child{padding-left:0;}th:last-child,td:last-child{padding-right:0;}blockquote > :last-child{margin-bottom:0;}blockquote cite{font-size:1rem;line-height:1.75rem;color:hsla(0,0%,0%,0.9);font-weight:400;}blockquote cite:before{content:"— ";}ul,ol{margin-left:0;}@media only screen and (max-width:480px){ul,ol{margin-left:1.75rem;}blockquote{margin-left:-1.3125rem;margin-right:0;padding-left:0.98438rem;}}h1,h2,h3,h4,h5,h6{margin-top:3.5rem;}a{box-shadow:0 1px 0 0 currentColor;color:#007acc;text-decoration:none;}a:hover,a:active{box-shadow:none;}mark,ins{background:#007acc;color:white;padding:0.10938rem 0.21875rem;text-decoration:none;}a.gatsby-resp-image-link{box-shadow:none;}</style><link href="//fonts.googleapis.com/css?family=Montserrat:700|Merriweather:400,400i,700,700i,900,900i" rel="stylesheet" type="text/css"/><style id="gatsby-inlined-css">@font-face{font-family:Montserrat;font-style:normal;font-display:swap;font-weight:100;src:local("Montserrat Thin "),local("Montserrat-Thin"),url(/blog/static/montserrat-latin-100.50d27986.woff2) format("woff2"),url(/blog/static/montserrat-latin-100.5e334eff.woff) format("woff")}@font-face{font-family:Montserrat;font-style:italic;font-display:swap;font-weight:100;src:local("Montserrat Thin italic"),local("Montserrat-Thinitalic"),url(/blog/static/montserrat-latin-100italic.8c070533.woff2) format("woff2"),url(/blog/static/montserrat-latin-100italic.03e19243.woff) format("woff")}@font-face{font-family:Montserrat;font-style:normal;font-display:swap;font-weight:200;src:local("Montserrat Extra Light "),local("Montserrat-Extra Light"),url(/blog/static/montserrat-latin-200.4343d3d9.woff2) format("woff2"),url(/blog/static/montserrat-latin-200.f2022ecd.woff) format("woff")}@font-face{font-family:Montserrat;font-style:italic;font-display:swap;font-weight:200;src:local("Montserrat Extra Light italic"),local("Montserrat-Extra Lightitalic"),url(/blog/static/montserrat-latin-200italic.116c4c4b.woff2) format("woff2"),url(/blog/static/montserrat-latin-200italic.89614a60.woff) format("woff")}@font-face{font-family:Montserrat;font-style:normal;font-display:swap;font-weight:300;src:local("Montserrat Light "),local("Montserrat-Light"),url(/blog/static/montserrat-latin-300.d2ad295b.woff2) format("woff2"),url(/blog/static/montserrat-latin-300.3a371ee0.woff) format("woff")}@font-face{font-family:Montserrat;font-style:italic;font-display:swap;font-weight:300;src:local("Montserrat Light italic"),local("Montserrat-Lightitalic"),url(/blog/static/montserrat-latin-300italic.f6b6bf24.woff2) format("woff2"),url(/blog/static/montserrat-latin-300italic.16521668.woff) format("woff")}@font-face{font-family:Montserrat;font-style:normal;font-display:swap;font-weight:400;src:local("Montserrat Regular "),local("Montserrat-Regular"),url(/blog/static/montserrat-latin-400.240a8444.woff2) format("woff2"),url(/blog/static/montserrat-latin-400.b20cc131.woff) format("woff")}@font-face{font-family:Montserrat;font-style:italic;font-display:swap;font-weight:400;src:local("Montserrat Regular italic"),local("Montserrat-Regularitalic"),url(/blog/static/montserrat-latin-400italic.86172bb8.woff2) format("woff2"),url(/blog/static/montserrat-latin-400italic.9405e787.woff) format("woff")}@font-face{font-family:Montserrat;font-style:normal;font-display:swap;font-weight:500;src:local("Montserrat Medium "),local("Montserrat-Medium"),url(/blog/static/montserrat-latin-500.fb8d6b71.woff2) format("woff2"),url(/blog/static/montserrat-latin-500.50825d47.woff) format("woff")}@font-face{font-family:Montserrat;font-style:italic;font-display:swap;font-weight:500;src:local("Montserrat Medium italic"),local("Montserrat-Mediumitalic"),url(/blog/static/montserrat-latin-500italic.c0a555a4.woff2) format("woff2"),url(/blog/static/montserrat-latin-500italic.635de59c.woff) format("woff")}@font-face{font-family:Montserrat;font-style:normal;font-display:swap;font-weight:600;src:local("Montserrat SemiBold "),local("Montserrat-SemiBold"),url(/blog/static/montserrat-latin-600.d5615136.woff2) format("woff2"),url(/blog/static/montserrat-latin-600.f300da4f.woff) format("woff")}@font-face{font-family:Montserrat;font-style:italic;font-display:swap;font-weight:600;src:local("Montserrat SemiBold italic"),local("Montserrat-SemiBolditalic"),url(/blog/static/montserrat-latin-600italic.10f29d13.woff2) format("woff2"),url(/blog/static/montserrat-latin-600italic.2bc37d86.woff) format("woff")}@font-face{font-family:Montserrat;font-style:normal;font-display:swap;font-weight:700;src:local("Montserrat Bold "),local("Montserrat-Bold"),url(/blog/static/montserrat-latin-700.7d77e1f0.woff2) format("woff2"),url(/blog/static/montserrat-latin-700.81826529.woff) format("woff")}@font-face{font-family:Montserrat;font-style:italic;font-display:swap;font-weight:700;src:local("Montserrat Bold italic"),local("Montserrat-Bolditalic"),url(/blog/static/montserrat-latin-700italic.1dd2b53f.woff2) format("woff2"),url(/blog/static/montserrat-latin-700italic.c162d257.woff) format("woff")}@font-face{font-family:Montserrat;font-style:normal;font-display:swap;font-weight:800;src:local("Montserrat ExtraBold "),local("Montserrat-ExtraBold"),url(/blog/static/montserrat-latin-800.d4e7bf86.woff2) format("woff2"),url(/blog/static/montserrat-latin-800.895aadbf.woff) format("woff")}@font-face{font-family:Montserrat;font-style:italic;font-display:swap;font-weight:800;src:local("Montserrat ExtraBold italic"),local("Montserrat-ExtraBolditalic"),url(/blog/static/montserrat-latin-800italic.fc0cbe44.woff2) format("woff2"),url(/blog/static/montserrat-latin-800italic.b3362875.woff) format("woff")}@font-face{font-family:Montserrat;font-style:normal;font-display:swap;font-weight:900;src:local("Montserrat Black "),local("Montserrat-Black"),url(/blog/static/montserrat-latin-900.c8bdd772.woff2) format("woff2"),url(/blog/static/montserrat-latin-900.1b99ef78.woff) format("woff")}@font-face{font-family:Montserrat;font-style:italic;font-display:swap;font-weight:900;src:local("Montserrat Black italic"),local("Montserrat-Blackitalic"),url(/blog/static/montserrat-latin-900italic.cb72c1f9.woff2) format("woff2"),url(/blog/static/montserrat-latin-900italic.b78bb9f8.woff) format("woff")}@font-face{font-family:Merriweather;font-style:normal;font-display:swap;font-weight:300;src:local("Merriweather Light "),local("Merriweather-Light"),url(/blog/static/merriweather-latin-300.f015f1e9.woff2) format("woff2"),url(/blog/static/merriweather-latin-300.92dfe81b.woff) format("woff")}@font-face{font-family:Merriweather;font-style:italic;font-display:swap;font-weight:300;src:local("Merriweather Light italic"),local("Merriweather-Lightitalic"),url(/blog/static/merriweather-latin-300italic.7fd86b32.woff2) format("woff2"),url(/blog/static/merriweather-latin-300italic.878b76f5.woff) format("woff")}@font-face{font-family:Merriweather;font-style:normal;font-display:swap;font-weight:400;src:local("Merriweather Regular "),local("Merriweather-Regular"),url(/blog/static/merriweather-latin-400.12dbf4c0.woff2) format("woff2"),url(/blog/static/merriweather-latin-400.1fffad22.woff) format("woff")}@font-face{font-family:Merriweather;font-style:italic;font-display:swap;font-weight:400;src:local("Merriweather Regular italic"),local("Merriweather-Regularitalic"),url(/blog/static/merriweather-latin-400italic.1e0d3e81.woff2) format("woff2"),url(/blog/static/merriweather-latin-400italic.de18d4c4.woff) format("woff")}@font-face{font-family:Merriweather;font-style:normal;font-display:swap;font-weight:700;src:local("Merriweather Bold "),local("Merriweather-Bold"),url(/blog/static/merriweather-latin-700.dc8fec81.woff2) format("woff2"),url(/blog/static/merriweather-latin-700.d7d2ed8e.woff) format("woff")}@font-face{font-family:Merriweather;font-style:italic;font-display:swap;font-weight:700;src:local("Merriweather Bold italic"),local("Merriweather-Bolditalic"),url(/blog/static/merriweather-latin-700italic.b7b7e5da.woff2) format("woff2"),url(/blog/static/merriweather-latin-700italic.6210a5fc.woff) format("woff")}@font-face{font-family:Merriweather;font-style:normal;font-display:swap;font-weight:900;src:local("Merriweather Black "),local("Merriweather-Black"),url(/blog/static/merriweather-latin-900.43f870d5.woff2) format("woff2"),url(/blog/static/merriweather-latin-900.8f3806df.woff) format("woff")}@font-face{font-family:Merriweather;font-style:italic;font-display:swap;font-weight:900;src:local("Merriweather Black italic"),local("Merriweather-Blackitalic"),url(/blog/static/merriweather-latin-900italic.168c1ab2.woff2) format("woff2"),url(/blog/static/merriweather-latin-900italic.ae7778f0.woff) format("woff")}</style></head><body><div id="___gatsby"><div style="max-width:42rem;margin-left:auto;margin-right:auto;padding:2.625rem 1.3125rem;" data-reactroot="" data-reactid="1" data-react-checksum="984186466"><h3 style="font-family:Montserrat, sans-serif;margin-top:0;margin-bottom:-1.75rem;" data-reactid="2"><a style="box-shadow:none;text-decoration:none;color:inherit;" href="/blog/" data-reactid="3">Gatsby Starter Blog</a></h3><div data-reactid="4"><!-- react-empty: 5 --><h1 data-reactid="6">React组件库主题设计</h1><p style="font-size:0.83255rem;line-height:1.75rem;display:block;margin-bottom:1.75rem;margin-top:-1.75rem;" data-reactid="7">November 15, 2017</p><div data-reactid="8"><p>讨论地址：<a href="https://github.com/whinc/blog/issues/1">《React UI库主题设计》讨论 #1</a></p>
+<p>基于 React 的 UI 组件库层出不穷，作为组件库很重要的一个功能就是实现主题换肤功能。通过组件库提供的主题定制接口，用户只需要修改一些组件的 UI 参数，就可以达到修改整个组件库样式。</p>
+<p>目标：可定制性强，并且易学易用。</p>
+<h2>一种简单的主题设计方案</h2>
+<p>为了支持根据主题改变外观，组件库中每个组件都要求暴露一个<code>style</code>属性，以便外部可以通过传入不同样式控制组件的外观。</p>
+<div class="gatsby-highlight">
+      <pre class="language-javascript"><code><span class="token operator">&lt;</span>Button style<span class="token operator">=</span><span class="token punctuation">{</span>style<span class="token punctuation">}</span><span class="token operator">></span>
+</code></pre>
+      </div>
+<p>为了切换主题，先定义黑白两套主题。不同主题之间只是样式取值不一样，数据结构必须保持一致。每种主题详细定义了每个组件的<code>style</code>值。</p>
+<div class="gatsby-highlight">
+      <pre class="language-javascript"><code><span class="token keyword">const</span> DarkTheme <span class="token operator">=</span> <span class="token punctuation">{</span>
+  ButtonStyle<span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token operator">...</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+  InputStyle<span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token operator">...</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">const</span> LightTheme <span class="token operator">=</span> <span class="token punctuation">{</span>
+  ButtonStyle<span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token operator">...</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+  InputStyle<span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token operator">...</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+      </div>
+<p>接下来就是切换主题了，应用内不直接引用具体的某个主题，而是引用主题的抽象，由于不同主题数据结构相同，只需要在创建<code>theme</code>对象时，赋予不同的主题即可达到切换整个应用外观的目的。</p>
+<div class="gatsby-highlight">
+      <pre class="language-javascript"><code><span class="token keyword">const</span> theme <span class="token operator">=</span> DarkTheme
+<span class="token comment">//const theme = LightTheme</span>
+ReactDOM<span class="token punctuation">.</span><span class="token function">render</span><span class="token punctuation">(</span>
+  <span class="token operator">&lt;</span>App<span class="token operator">></span>
+    <span class="token operator">&lt;</span>Button style<span class="token operator">=</span><span class="token punctuation">{</span>theme<span class="token punctuation">.</span>ButtonStyle<span class="token punctuation">}</span> <span class="token operator">/</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span>Input style<span class="token operator">=</span><span class="token punctuation">{</span>theme<span class="token punctuation">.</span>InputStyle<span class="token punctuation">}</span> <span class="token operator">/</span><span class="token operator">></span>
+  <span class="token operator">&lt;</span><span class="token operator">/</span>App<span class="token operator">></span>
+<span class="token punctuation">,</span> node<span class="token punctuation">)</span>
+</code></pre>
+      </div>
+<p>到这里，一个主题切换方案就设计完了。除了每次都要在组件中声明<code>style</code>为当前主题样式外，其他都比较满意，你可以修改全局主题，也可以修改单独某个组件的默认样式。</p>
+<div class="gatsby-highlight">
+      <pre class="language-javascript"><code><span class="token keyword">const</span> theme <span class="token operator">=</span> DarkTheme
+<span class="token comment">// 修改全局 Button 的默认样式</span>
+theme<span class="token punctuation">.</span>ButtonStyle <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token operator">...</span><span class="token keyword">this</span><span class="token punctuation">.</span>ButtonStyle<span class="token punctuation">,</span> color<span class="token punctuation">:</span> <span class="token string">'red'</span><span class="token punctuation">}</span>
+
+ReactDOM<span class="token punctuation">.</span><span class="token function">render</span><span class="token punctuation">(</span>
+  <span class="token operator">&lt;</span>App<span class="token operator">></span>
+    <span class="token punctuation">{</span><span class="token comment">/* 修改单个 Button 的默认样式 */</span><span class="token punctuation">}</span> 
+    <span class="token operator">&lt;</span>Button style<span class="token operator">=</span><span class="token punctuation">{</span><span class="token punctuation">[</span>theme<span class="token punctuation">.</span>ButtonStyle<span class="token punctuation">,</span> <span class="token punctuation">{</span>color<span class="token punctuation">:</span> <span class="token string">'blue'</span><span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">}</span> <span class="token operator">/</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span>Input style<span class="token operator">=</span><span class="token punctuation">{</span>theme<span class="token punctuation">.</span>InputStyle<span class="token punctuation">}</span> <span class="token operator">/</span><span class="token operator">></span>
+  <span class="token operator">&lt;</span><span class="token operator">/</span>App<span class="token operator">></span>
+<span class="token punctuation">,</span> node<span class="token punctuation">)</span>
+</code></pre>
+      </div>
+<p>这种方式一个主要问题是：每个组件使用时需要指定<code>style</code>为指定的主题样式，对使用者不透明。如果能解决好这个问题，那这就会是一个简单强大的主题切换方案了，接下来解决这个问题。</p>
+<h2>基于 Context 的组件主题设计方案</h2>
+<p>Context 是 React 15 引入的实验特性（现实情况是已经广泛用于各种库），利用它可以实现从父组件传递数据给子（及后代）组件，而不必依赖于中间组件的层层传递，整个传递过程对中间的组件是透明的。</p>
+<p>通过组件的 Context 特性，可以将在根组件中定义的主题对象直接传递给目标子组件，而不必显式地由外部传入<code>style</code>属性来设置默认主题样式。预期像下面这样使用主题：在根组件中传入主题配置，所有在根组件下的组件库中的组件都显示传入的主题外观。</p>
+<div class="gatsby-highlight">
+      <pre class="language-javascript"><code>ReactDOM<span class="token punctuation">.</span><span class="token function">render</span><span class="token punctuation">(</span>
+  <span class="token operator">&lt;</span>ThemeProvider theme<span class="token operator">=</span><span class="token punctuation">{</span>DarkTheme<span class="token punctuation">}</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span>div<span class="token operator">></span>
+      <span class="token operator">&lt;</span>p<span class="token operator">></span>Theme test<span class="token operator">&lt;</span><span class="token operator">/</span>p<span class="token operator">></span>
+      <span class="token operator">&lt;</span>FlatButton title<span class="token operator">=</span><span class="token punctuation">{</span><span class="token string">'FlatButton'</span><span class="token punctuation">}</span> <span class="token operator">/</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
+  <span class="token operator">&lt;</span><span class="token operator">/</span>ThemeProvider<span class="token operator">></span>
+<span class="token punctuation">,</span> node<span class="token punctuation">)</span>
+</code></pre>
+      </div>
+<p>思路有了，接下来就开始动手实现。</p>
+<p>首先，定义一个的根组件命名为<code>ThemeProvider</code>（命名按喜好，无影响），它的<code>render</code>方法返回传入的<code>children</code>。这个组件充当一个主题配置分发的角色，它将传入的<code>theme</code>配置对象传递给子（及后代）组件。</p>
+<div class="gatsby-highlight">
+      <pre class="language-javascript"><code><span class="token keyword">class</span> <span class="token class-name">ThemeProvider</span> <span class="token keyword">extends</span> <span class="token class-name">Component</span> <span class="token punctuation">{</span>
+  <span class="token keyword">static</span> propTypes <span class="token operator">=</span> <span class="token punctuation">{</span>
+    children<span class="token punctuation">:</span> PropTypes<span class="token punctuation">.</span>element<span class="token punctuation">,</span>
+    theme<span class="token punctuation">:</span> PropTypes<span class="token punctuation">.</span>object
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">static</span> childContextTypes <span class="token operator">=</span> <span class="token punctuation">{</span>
+    theme<span class="token punctuation">:</span> PropTypes<span class="token punctuation">.</span>object<span class="token punctuation">.</span>isRequired
+  <span class="token punctuation">}</span>
+
+  <span class="token function">getChildContext</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token punctuation">{</span>
+      theme<span class="token punctuation">:</span> <span class="token keyword">this</span><span class="token punctuation">.</span>props<span class="token punctuation">.</span>theme <span class="token operator">||</span> <span class="token function">createTheme</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>props<span class="token punctuation">.</span>children
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+      </div>
+<p>然后，子（后代）组件中接收来自根组件的<code>context</code>对象，并读取<code>theme</code>配置对象，将样式应用到当前自身。</p>
+<div class="gatsby-highlight">
+      <pre class="language-javascript"><code><span class="token keyword">class</span> <span class="token class-name">FlatButton</span> <span class="token keyword">extends</span> <span class="token class-name">Component</span> <span class="token punctuation">{</span>
+  <span class="token keyword">static</span> propTypes <span class="token operator">=</span> <span class="token punctuation">{</span>
+    title<span class="token punctuation">:</span> PropTypes<span class="token punctuation">.</span>string
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">static</span> contextTypes <span class="token operator">=</span> <span class="token punctuation">{</span>
+    theme<span class="token punctuation">:</span> PropTypes<span class="token punctuation">.</span>object<span class="token punctuation">.</span>isRequired
+  <span class="token punctuation">}</span>
+
+  <span class="token function">render</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> <span class="token punctuation">{</span>title<span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>props
+    <span class="token keyword">const</span> <span class="token punctuation">{</span>
+      fontFamily<span class="token punctuation">,</span>
+      borderRadius<span class="token punctuation">,</span>
+      palette<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        primaryColor<span class="token punctuation">,</span>
+        secondColor
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>context<span class="token punctuation">.</span>theme
+    <span class="token keyword">return</span> <span class="token operator">&lt;</span>button style<span class="token operator">=</span><span class="token punctuation">{</span><span class="token punctuation">{</span>backgroundColor<span class="token punctuation">:</span> primaryColor<span class="token punctuation">,</span> color<span class="token punctuation">:</span> secondColor<span class="token punctuation">,</span> fontFamily<span class="token punctuation">,</span> borderRadius<span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token operator">></span><span class="token punctuation">{</span>title<span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>button<span class="token operator">></span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+      </div>
+<p>OK，这就是全部了，现在可以向根组件<code>ThemeProvider</code>传入不同的主题配置改变整个UI库的外观。</p>
+<div class="gatsby-highlight">
+      <pre class="language-javascript"><code>ReactDOM<span class="token punctuation">.</span><span class="token function">render</span><span class="token punctuation">(</span>
+  <span class="token operator">&lt;</span>div style<span class="token operator">=</span><span class="token punctuation">{</span><span class="token punctuation">{</span>margin<span class="token punctuation">:</span> <span class="token number">20</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span>p<span class="token operator">></span>DarkTheme<span class="token operator">&lt;</span><span class="token operator">/</span>p<span class="token operator">></span>
+    <span class="token operator">&lt;</span>ThemeProvider theme<span class="token operator">=</span><span class="token punctuation">{</span><span class="token function">createTheme</span><span class="token punctuation">(</span>DarkTheme<span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token operator">></span>
+      <span class="token operator">&lt;</span>App <span class="token operator">/</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>ThemeProvider<span class="token operator">></span>
+    <span class="token operator">&lt;</span>p<span class="token operator">></span>LightTheme<span class="token operator">&lt;</span><span class="token operator">/</span>p<span class="token operator">></span>
+    <span class="token operator">&lt;</span>ThemeProvider theme<span class="token operator">=</span><span class="token punctuation">{</span><span class="token function">createTheme</span><span class="token punctuation">(</span>LightTheme<span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token operator">></span>
+      <span class="token operator">&lt;</span>App <span class="token operator">/</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>ThemeProvider<span class="token operator">></span>
+  <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
+<span class="token punctuation">,</span> node<span class="token punctuation">)</span>
+</code></pre>
+      </div>
+<p>
+  <a
+    class="gatsby-resp-image-link"
+    href="/static/figure1-b3895cfa7babe854233b5349f89a67fe-b9cd8.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+  
+  <span
+    class="gatsby-resp-image-wrapper"
+    style="position: relative; display: block; ; max-width: 98px; margin-left: auto; margin-right: auto;"
+  >
+    <span
+      class="gatsby-resp-image-background-image"
+      style="padding-bottom: 153.0612244897959%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAfCAYAAADnTu3OAAAACXBIWXMAAAsSAAALEgHS3X78AAAD4ElEQVRIx6VWSS9lQRS+C4mdIYKNGBISCyS2NnYW/oUVFgQhkSCasMHCAkGMMUXEEMNCJCTmufGeuQ0xz2KIZ/76fkfq9e3XV3qq5LyqW7feV6fO+c5XV4Penp+fcXV1hZeXFzi2p6cneff4+Ijftff3d2gcLCwsIC8vD4uLi7i+vsbNzQ3m5uZknn1WVhbq6+txeHQk78/Pz3FwcIDNzU2cnJzg8vJS5tm0t7c3WCwW9HR3o6amBjk5OaiqqkJ+fj7S0tKw+e0bhoeH0dzcjNbWVqSnpyM3NxcFBQVISkpCUVERMjMz0dHR8cND7tTS0oKRkRF068BDQ0PY3t5GX18fDg8Psbq6iuXlZdhsD2hsbJT5tbU1WKwWWK1WtLW1yWnEQ/4wdg8PD/aYMabGuBh7ttfXV+l5OvVOxV8zLlQL1CJHMOPaz+Y045+VEZhe/K3ZAR1T/z9Nc/SO7fb2Fuvr6/ZkMGkbGxtYWVmReY7Zc14Z3zEPmlnMSCNfX19ERkYiOjoafn5+CA4ORlRUFEJDQxEQEICQkBBZ4+PjA39/f4SFhckmmlnwZ2ZmoGkaEhIShPDkZnl5Oerq6pCSkoLs7GxUV1cjPj4ehYWFiIiIkPX00vTIs7OzcHZ2RmBgIMLDw4XEX3K+ICYmBrGxsQKYnJyMxMREqaKgoCA4OTl9ADKjNCPgV52kHh4e8Pb2hqenJ1xcXODq6gp3d3cxjt3c3Ozm5eUlmzPmGtOtQBUPKQYTExOYmpoSm56eFjOOjcb58fFx3N3dfQAqUKOX/0wblgzNCMpezbMMVTmquc9MiP2sD4xxVB4ba9bYjJWhHPmpUrg7iWyz2cRUUwJB7Zufn8fO7u6fHZkgrAaKJBk/MDCAsbExNDU1iUzxubi4GD09PaKHlCkmgdTq7e3F6OioSBlljE4I4OTkpJ7yNXR1daG0tFQASkpKkJGRIZtQJ7e2tkSAU1NTERcXh7KyMhHhiooK4WVlZaWotkZUiung4KCUDoGo2Dwqn+n5/v6+hIV0ooekFOeOj49xf38vDtFD+5EJqi4h/kmJ7b+ojx3QmF0zgf2d2QVWARq56FiOf2OmgP9VKY6A3OVCTwTv3SP9HqYx+Lx/2Ts+005PT0VpmDhTD/f29mS8tLQkWWXCmG1y7+zsTJJ2cXEhPT8KlIZys18AadyVnCLBSXqKKQW2trYW/f39aGhoEL52dnaK6JJC3Jx3uKmH3MlYyyy9Vb0adnZ2sKuXIDdhSMhfEp6NPKQjpjHkIh6PQPy2YXwIwruGxjE9slqs0nOuvb3d/MjvuoeMjQo8TSXnM1PriPMdVA2eYiJKDnwAAAAASUVORK5CYII='); background-size: cover; display: block;"
+    >
+      <img
+        class="gatsby-resp-image-image"
+        style="width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px white;"
+        alt="不同主题的效果"
+        title=""
+        src="/static/figure1-b3895cfa7babe854233b5349f89a67fe-b9cd8.png"
+        srcset="/static/figure1-b3895cfa7babe854233b5349f89a67fe-b9cd8.png 98w"
+        sizes="(max-width: 98px) 100vw, 98px"
+      />
+    </span>
+  </span>
+  
+  </a>
+    </p>
+<h3>自定义组件的主题</h3>
+<p>等等有个问题，上面传递给根组件<code>ThemeProvider</code>的主题配置仅影响组件库中的组件外观，对自定义的组件没有效果。</p>
+<p>下面<code>MyButton</code>是一个自定义组件，并非组件库提供的组件，放到页面上显示的是默认的浏览器样式。</p>
+<div class="gatsby-highlight">
+      <pre class="language-javascript"><code><span class="token keyword">class</span> <span class="token class-name">MyButton</span> <span class="token keyword">extends</span> <span class="token class-name">Component</span> <span class="token punctuation">{</span>
+  <span class="token keyword">static</span> propTypes <span class="token operator">=</span> <span class="token punctuation">{</span>
+    title<span class="token punctuation">:</span> PropTypes<span class="token punctuation">.</span>string
+  <span class="token punctuation">}</span>
+
+  <span class="token function">render</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> <span class="token punctuation">{</span>title<span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>props
+    <span class="token keyword">return</span> <span class="token operator">&lt;</span>button<span class="token operator">></span><span class="token punctuation">{</span>title<span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>button<span class="token operator">></span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+      </div>
+<p>
+  <a
+    class="gatsby-resp-image-link"
+    href="/static/figure2-1b2d2e3ce7242dbc50992563e2fc4912-b4fe8.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+  
+  <span
+    class="gatsby-resp-image-wrapper"
+    style="position: relative; display: block; ; max-width: 176px; margin-left: auto; margin-right: auto;"
+  >
+    <span
+      class="gatsby-resp-image-background-image"
+      style="padding-bottom: 85.79545454545455%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAARCAYAAADdRIy+AAAACXBIWXMAAAsSAAALEgHS3X78AAACEElEQVQ4y5VUy+rxURT1RB5DvIIyMJSBmAp5AAOlPIMwID63kMjAbeBzv0QGIreQ+2X97V1HPuHvO7U75/wc66y199pHcjqdkM/nsVwucTgc0Ol0eD+fz3E+n3E8HjloTeN6veLTkFwuF8TjcTgcDtjtdrhcLlQqFXg8HthsNrjdbjidThQKhTvgJ1AGnE6n2G63HMRyt9uBmK9WK2a3Xq95fgR8FQyI/xyP7J7Z0lryeAMxbbfbqNfrqNVqHJW/FZ7H4/HHS+4MxYKkUg7lcjm0Wi2HWq2GSqWCQqGAwWBg6XQhFY5iMBig3+/z9zsg5VAAmkwmSKVS6HQ66PV6BtRoNJDJZFAqlZjOZkgmk8hkMsjlcshms0ilUqzsLpnsQAua6bDZbOYwGo2wWCx8idVqRTAYhLj8eVDBxG+S0w2INu8Ov8uXiMf/MUNhXDH2+z3nh1LwG9hL25DnyuUyIpEIwuEwEokEQqEQ7ymi0Sh8Ph+q1ep3xiYzEyCBEVCr1eLKkXXS6TR3CM3dbvc7QGJIQRIfpX+Tv7eSReP/1hnPDF92iuhbYjeZTDAcDrFYLNhbNFNKyLi9Xo9V0FnR7y9t8whI7dVoNBD8E4TX6+UC+f1+FItF/j4ajRAIBBCLxdiz9EpR3v8xtpBMt1Ixms0m9y5VlXv59pRRgUqlEjabDWa3biEl9H6SAgpSIBj+AKim6n/tr+s2AAAAAElFTkSuQmCC'); background-size: cover; display: block;"
+    >
+      <img
+        class="gatsby-resp-image-image"
+        style="width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px white;"
+        alt="figure2"
+        title=""
+        src="/static/figure2-1b2d2e3ce7242dbc50992563e2fc4912-b4fe8.png"
+        srcset="/static/figure2-1b2d2e3ce7242dbc50992563e2fc4912-646f4.png 148w,
+/static/figure2-1b2d2e3ce7242dbc50992563e2fc4912-b4fe8.png 176w"
+        sizes="(max-width: 176px) 100vw, 176px"
+      />
+    </span>
+  </span>
+  
+  </a>
+    </p>
+<p>对比自定义组件与组件库中的组件代码，缺少了读取<code>context</code>对象中的<code>theme</code>对象并应用样式到自身的代码。补上这部分代码（从<code>context</code>中读取主题样式并应用到自身）后，自定义组件也可以和组件库中的组件一样，实现与当前主题保持外观一致变化。</p>
+<p>自定义组件要做的工作就是定义<code>contextTypes</code>，然后在<code>render</code>中读取<code>context</code>中的主题配置并应用到自身样式。为每个自定义组件编写一次<code>contextTypes</code>定义十分乏味，这里利用高阶组件封装一下。</p>
+<p>代码如下，<code>themeable</code>的主要任务是从根组件<code>ThemeProvider</code>中获取<code>theme</code>配置并传递给被包裹的组件。</p>
+<div class="gatsby-highlight">
+      <pre class="language-javascript"><code><span class="token keyword">const</span> <span class="token function-variable function">themeable</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> <span class="token function-variable function">getDisplayName</span> <span class="token operator">=</span> c <span class="token operator">=></span> c<span class="token punctuation">.</span>displayName <span class="token operator">||</span> c<span class="token punctuation">.</span>name <span class="token operator">||</span> <span class="token string">'Component'</span>
+  <span class="token keyword">return</span> Component <span class="token operator">=></span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> <span class="token function-variable function">WrappedComponent</span> <span class="token operator">=</span>  <span class="token punctuation">(</span>props<span class="token punctuation">,</span> context<span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+      <span class="token keyword">const</span> <span class="token punctuation">{</span>theme <span class="token operator">=</span> <span class="token function">createTheme</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">}</span> <span class="token operator">=</span> context
+      <span class="token keyword">return</span> <span class="token operator">&lt;</span>Component theme<span class="token operator">=</span><span class="token punctuation">{</span>theme<span class="token punctuation">}</span> <span class="token punctuation">{</span><span class="token operator">...</span>props<span class="token punctuation">}</span> <span class="token operator">/</span><span class="token operator">></span>
+    <span class="token punctuation">}</span>
+    WrappedComponent<span class="token punctuation">.</span>contextTypes <span class="token operator">=</span> <span class="token punctuation">{</span> 
+      theme<span class="token punctuation">:</span> PropTypes<span class="token punctuation">.</span>object
+    <span class="token punctuation">}</span>
+    WrappedComponent<span class="token punctuation">.</span>displayName <span class="token operator">=</span> <span class="token function">getDisplayName</span><span class="token punctuation">(</span>Component<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> WrappedComponent
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+      </div>
+<p>自定义组件导出时，使用<code>themeable</code>修饰一下，之后使用时导入的<code>MyButton</code>组件中可以直接使用来自根组件<code>ThemeProvider</code>中提供的<code>theme</code>配置。</p>
+<div class="gatsby-highlight">
+      <pre class="language-javascript"><code><span class="token keyword">class</span> <span class="token class-name">MyButton</span> <span class="token keyword">extends</span> <span class="token class-name">Component</span> <span class="token punctuation">{</span>
+  <span class="token keyword">static</span> propTypes <span class="token operator">=</span> <span class="token punctuation">{</span>
+    title<span class="token punctuation">:</span> PropTypes<span class="token punctuation">.</span>string
+  <span class="token punctuation">}</span>
+
+  <span class="token function">render</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> <span class="token punctuation">{</span>title<span class="token punctuation">,</span> theme<span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>props
+    <span class="token keyword">return</span> <span class="token operator">&lt;</span>button style<span class="token operator">=</span><span class="token punctuation">{</span><span class="token punctuation">{</span>color<span class="token punctuation">:</span> theme<span class="token punctuation">.</span>palette<span class="token punctuation">.</span>secondColor<span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token operator">></span><span class="token punctuation">{</span>title<span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>button<span class="token operator">></span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token function">themeble</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">(</span>MyButton<span class="token punctuation">)</span>
+</code></pre>
+      </div>
+<h2>设置单个组件主题</h2>
+<p>前面提到了在<code>ThemeProvider</code>中提供一份<code>theme</code>配置对象，它包含了诸如调色板、字体、边框、间距、动画等配置，它会应用到所有组件库中的组件，同时也提供给自定义组件使用（通过<code>themeable</code>包装）。有时在开发某个组件时，希望该组件的样式可以单独定制，当前的<code>theme</code>配置结构无法满足，需要对配置结构进行细化，实现针对特定组件的主题定制。</p>
+<p>首先，修改组件内部应用<code>theme</code>的优先级：优先使用主题配置中与当前组件匹配（一般按组件名）的样式。例如下面<code>FlatButton</code>优先使用<code>theme.flatButton</code>配置的样式。</p>
+<div class="gatsby-highlight">
+      <pre class="language-javascript"><code><span class="token keyword">class</span> <span class="token class-name">FlatButton</span> <span class="token keyword">extends</span> <span class="token class-name">Component</span> <span class="token punctuation">{</span>
+  <span class="token keyword">static</span> propTypes <span class="token operator">=</span> <span class="token punctuation">{</span>
+    title<span class="token punctuation">:</span> PropTypes<span class="token punctuation">.</span>string
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">static</span> contextTypes <span class="token operator">=</span> <span class="token punctuation">{</span>
+    theme<span class="token punctuation">:</span> PropTypes<span class="token punctuation">.</span>object<span class="token punctuation">.</span>isRequired
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">static</span> defaultProps <span class="token operator">=</span> <span class="token punctuation">{</span>
+    title<span class="token punctuation">:</span> <span class="token string">''</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token function">render</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> <span class="token punctuation">{</span>title<span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>props
+    <span class="token keyword">const</span> <span class="token punctuation">{</span>
+      flatButton<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        borderRadius<span class="token punctuation">,</span>
+        textColor<span class="token punctuation">,</span>
+        backgroundColor
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>context<span class="token punctuation">.</span>theme
+    <span class="token keyword">return</span> <span class="token operator">&lt;</span>button style<span class="token operator">=</span><span class="token punctuation">{</span><span class="token punctuation">{</span> backgroundColor<span class="token punctuation">,</span> color<span class="token punctuation">:</span> textColor<span class="token punctuation">,</span> borderRadius <span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token operator">></span><span class="token punctuation">{</span>title<span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>button<span class="token operator">></span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+      </div>
+<p>主题配置对象中仅定义最小配置项，这样可以让主题配置非常精简，<code>createTheme()</code>函数接收主题配置对象，返回包含了特定组件的样式，组件默认主题样式基于最小配置项。</p>
+<p>例如下面主题的配置只包含了调色板、字体、边框，<code>createTheme()</code>函数调用后返回的主题对象，包含了<code>FlatButton</code>的样式，创建的新的主题对象提供给<code>ThemeProvider</code>组件进行分发。</p>
+<div class="gatsby-highlight">
+      <pre class="language-javascript"><code><span class="token keyword">const</span> DarkTheme <span class="token operator">=</span> <span class="token punctuation">{</span>
+  fontFamily<span class="token punctuation">:</span> <span class="token string">'Roboto, sans-serif'</span><span class="token punctuation">,</span>
+  borderRadius<span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
+  palette<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    primaryColor<span class="token punctuation">:</span> <span class="token string">'#000000'</span><span class="token punctuation">,</span>
+    secondColor<span class="token punctuation">:</span> <span class="token string">'#444444'</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> <span class="token function">createTheme</span> <span class="token punctuation">(</span>theme <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token operator">...</span>more<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> noneUiTheme <span class="token operator">=</span> <span class="token function">merge</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span> LightTheme<span class="token punctuation">,</span> theme<span class="token punctuation">,</span> <span class="token operator">...</span>more<span class="token punctuation">)</span>
+
+  <span class="token keyword">const</span> <span class="token punctuation">{</span>borderRadius<span class="token punctuation">,</span> palette<span class="token punctuation">,</span> fontFamily<span class="token punctuation">}</span> <span class="token operator">=</span> noneUiTheme
+  <span class="token keyword">return</span> <span class="token function">merge</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    flatButton<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      borderRadius<span class="token punctuation">:</span> borderRadius<span class="token punctuation">,</span>
+      textColor<span class="token punctuation">:</span> palette<span class="token punctuation">.</span>textColor<span class="token punctuation">,</span>
+      backgroundColor<span class="token punctuation">:</span> palette<span class="token punctuation">.</span>primaryColor
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span> noneUiTheme<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token operator">&lt;</span>ThemeProvider theme<span class="token operator">=</span><span class="token punctuation">{</span><span class="token function">createTheme</span><span class="token punctuation">(</span>DardTheme<span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token operator">></span>
+  <span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span> Your code <span class="token operator">--</span><span class="token operator">></span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>ThemeProvider <span class="token operator">></span>
+</code></pre>
+      </div>
+<p>经过上面的改动后，组件的主题没有发生什么变化，但是增加了为组件单独设置主题的能力。下面例子中，创建了一份自定义的<code>customDarkTheme</code>主题，该主题针对<code>FlatButton</code>样式进行了定制，组件库中其他组件保持当前默认主题不变。</p>
+<div class="gatsby-highlight">
+      <pre class="language-javascript"><code><span class="token keyword">import</span> <span class="token punctuation">{</span>ThemeProvider<span class="token punctuation">,</span> createTheme<span class="token punctuation">,</span> DarkTheme<span class="token punctuation">,</span> LightTheme<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'./none-ui'</span>
+
+<span class="token comment">// 继承 DarkTheme 并在此基础之上定制 FlatButton 组件的样式</span>
+<span class="token keyword">const</span> customDarkTheme <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token operator">...</span>DarkTheme<span class="token punctuation">,</span>
+  flatButton<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    backgroundColor<span class="token punctuation">:</span> <span class="token string">'red'</span><span class="token punctuation">,</span>
+    textColor<span class="token punctuation">:</span> <span class="token string">'white'</span><span class="token punctuation">,</span>
+    borderRadius<span class="token punctuation">:</span> <span class="token number">10</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+ReactDOM<span class="token punctuation">.</span><span class="token function">render</span><span class="token punctuation">(</span>
+  <span class="token operator">&lt;</span>div style<span class="token operator">=</span><span class="token punctuation">{</span><span class="token punctuation">{</span>margin<span class="token punctuation">:</span> <span class="token number">20</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span>p<span class="token operator">></span>DarkTheme<span class="token operator">&lt;</span><span class="token operator">/</span>p<span class="token operator">></span>
+    <span class="token operator">&lt;</span>ThemeProvider theme<span class="token operator">=</span><span class="token punctuation">{</span><span class="token function">createTheme</span><span class="token punctuation">(</span>DarkTheme<span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token operator">></span>
+      <span class="token operator">&lt;</span>App <span class="token operator">/</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>ThemeProvider<span class="token operator">></span>
+    <span class="token operator">&lt;</span>p<span class="token operator">></span>Custom DarkTheme<span class="token operator">&lt;</span><span class="token operator">/</span>p<span class="token operator">></span>
+    <span class="token operator">&lt;</span>ThemeProvider theme<span class="token operator">=</span><span class="token punctuation">{</span><span class="token function">createTheme</span><span class="token punctuation">(</span>customDarkTheme<span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token operator">></span>
+      <span class="token operator">&lt;</span>App <span class="token operator">/</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>ThemeProvider<span class="token operator">></span>
+    <span class="token operator">&lt;</span>p<span class="token operator">></span>LightTheme<span class="token operator">&lt;</span><span class="token operator">/</span>p<span class="token operator">></span>
+    <span class="token operator">&lt;</span>ThemeProvider theme<span class="token operator">=</span><span class="token punctuation">{</span><span class="token function">createTheme</span><span class="token punctuation">(</span>LightTheme<span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token operator">></span>
+      <span class="token operator">&lt;</span>App <span class="token operator">/</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>ThemeProvider<span class="token operator">></span>
+  <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
+<span class="token punctuation">,</span> document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">'root'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+      </div>
+<p>
+  <a
+    class="gatsby-resp-image-link"
+    href="/static/figure3-39d4db67117819e57b5e5e6559e1c3f2-d8d8c.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+  
+  <span
+    class="gatsby-resp-image-wrapper"
+    style="position: relative; display: block; ; max-width: 179px; margin-left: auto; margin-right: auto;"
+  >
+    <span
+      class="gatsby-resp-image-background-image"
+      style="padding-bottom: 143.5754189944134%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAdCAYAAACqhkzFAAAACXBIWXMAAAsSAAALEgHS3X78AAADHklEQVRIx6VVS0tbURC+P0So3Qqly0BKi6ELF6VbN23JolRKIRQs/QkNob9AkFbxhejKN0Jr0gTUNDXGF76VqNHcBE2ied087tczQ46NeXijPTCZc88998ucb76ZoxSLRZDpuo7yQWu1RuW+yqHQTzabxcrKCi4uLnB+fo6trS1+VlUViUQC8XicjfYZgSr0Mp/Pw+l0oqenB729vZiamsLm5ibGx8d5jZ6Hhoaws7PTGGAul8PJyQkuLy/ZUqkUkskk+2g0ypFR5Ol0+hqwHqhSj6v7DqU8KeSJPzri7OwsJiYmMD09zfOZmRksLi4yPYYRyigzmQwcDgfa29ths9lgt9vR2dmJjo4OWK1WWCwWpuJOgATU1NQEs9mMtrY2tLa2wmQyoaWlBc3NzcyxBKwFrJRrkHw4HMb6+jq2t7exsbHBFNCcsn5wcHD955WgEkOpJer7DsJh2Wiahr29PZbJ1dUVH4skQkYR7+/v8zoJ/+joCGtra8yl3EMmI7+uFI/HA5fLhcHBQQwPD3OmR0dH4fP52Lq7uzEyMsIVtLCwgK6uLgwMDGBychL9/f2s0xuVEgqFEIlEcHZ6ipCIIi42ZEXE5KMiyqDgL0VRicRRALJM6VsSP53yfhxW7C3/ljmUgHqhAHqVE80g43FDc/+C9vMHsi4nsmKeEZYOn9XN8M0slwgtCK99/wbd+hrFjzbo9i/QP3+C/uE99HdvkX7zCjFR9zASNgNS6YmF2FcHzh4+QOSpGerLF1CfW6CaTVAfP8LxsydIiJPgFpr+Hbm0QRNkJ397kVpaQkp6v7A/PiSPj43b112TYtixZS2TqEnQmpBERMgk4PcjHouhKI6YE2tkBSERw34odbi8vMxCJlFTu3K73RgbG2Mxk/X19XGNN9yxqb2vrq5id3eXo6U7hPypEDpFTuIl31DHrvfyrutVWS4IvvIlnmoNOgnZbaBV/ZCOSh2FLBAIMAWHh4cIBoPccehqbRiQIqTbzy8y7PV6+T6Zm5vD/Pw8dxwCpfcNA9KcrgHZF6WU5Jy80WVfVSn/K+4qDhux20D/Aim+hd/v29QsAAAAAElFTkSuQmCC'); background-size: cover; display: block;"
+    >
+      <img
+        class="gatsby-resp-image-image"
+        style="width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px white;"
+        alt="figure3"
+        title=""
+        src="/static/figure3-39d4db67117819e57b5e5e6559e1c3f2-d8d8c.png"
+        srcset="/static/figure3-39d4db67117819e57b5e5e6559e1c3f2-4cd3e.png 148w,
+/static/figure3-39d4db67117819e57b5e5e6559e1c3f2-d8d8c.png 179w"
+        sizes="(max-width: 179px) 100vw, 179px"
+      />
+    </span>
+  </span>
+  
+  </a>
+    </p>
+<h2>总结</h2>
+<p>文章首先介绍了一种简单直观的切换主题的实现方式，但这种方式要求每次使用组件时都要关心主题样式，对使用者不友好。针对这个问题，提供除了利用<code>React</code>的<code>Context</code>特性，在根组件中定义一次主题，所有使用到的组件库中的组件都显示当前主题，使用时无需关心主题样式。在此基础上，又介绍了自定义组件如何使用主题、如何修改特定组件的主题样式。</p>
+<p>本文主要参考了<a href="https://github.com/callemall/material-ui">callemall/material-ui</a>库的<a href="https://github.com/callemall/material-ui/tree/v0.19.4">v0.19.4</a>版本的主题切换功能实现机制，将其中的重要部分提取出来并简化，方便学习。</p>
+<p>文中的示例代码可以在Github上<a href="https://github.com/whinc/react-theme-solutions">whinc/react-theme-solutions</a>找到，这个仓库中代中实现了一个具有主题切换功能的UI库。</p></div><hr style="margin-bottom:1.75rem;" data-reactid="9"/><div style="display:flex;margin-bottom:4.375rem;" data-reactid="10"><img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEA8ADwAAD/2wCEAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAf/CABEIAGgAaAMBIgACEQEDEQH/xAAfAAABBAIDAQEAAAAAAAAAAAAIAAcJCgMGAgULBAH/2gAIAQEAAAAAv8LFx+H6ufRsTrRdLKsAdxGxhBpr/Xauzdiq2P2PCJiO6v8AV6Rh245pEjGCqytbAY+EnSaR0QbjN+Yz7zajfjv2O2KLX+U7IdINlmzqpyHvx2U8VkDK0/jR2MibNggq2JT2fgdlLluWGo+Pjc2Bngb7cTBrMWpnZXAHILwfm0MRpi2firbaacFcQxh1jwlblFDUrykqr2qHAXERY4IvCskbM4OY5R2tlbQsUannl/ls2VHYPNYCK9FcJS0Px6I13PtEEpVSb25xe37BJQ8054EwuOWe64vLil//xAAcAQACAQUBAAAAAAAAAAAAAAAGBwMAAQQFCAn/2gAIAQIQAAAAqGOTsPnEQChjZ6x5enfl8G6xLRnfb6Px8/iFjNgTZO0IgdBvAPZGVYaS7NIt/VsCPNnr/8QAHQEAAQQDAQEAAAAAAAAAAAAABwAEBggBBQkDAv/aAAgBAxAAAABOVmhlpyETCZCtlWjib23J28P7Me8yrJyRj0ZCQWlorYxgjWMrWQBf4fMosIFo5oVl/wCrJuv/xAAqEAACAgIBAwQCAgIDAAAAAAADBAIFAQYHABESCBMUFRAhFiAyNCMxgf/aAAgBAQABDAL8/wDnXlnv27fj9dEYAHHcphDw5uOqod/mbDUA6qd70+8c+vqthrHHP6ZzjGM5znthne9cXJkPypnJuHqMpNWZwmOhtbA7XqP2W2lGddRK1Strz/v0Zmjl6MV6zml6ziUVvaWYmEMffgKy7s53CfxWPgZmBwmH7PtSjMEpDnxrzewqUFDux8nWhOJIxnCUZw/HKN9bra7Zh1xeLj1Xhv61Zm2T+O3y78WD8GSh74srwntZJnOMx++Lg8pSIRkf2Ch4ZXzDC/VOSxRbiVgMTKapvdUL7oZ4Exi8QWhET6P7TMP99cI8jkAUGmXZ/JfrYLL6ytKaH+x89jHlCeY5id4mYzIf2/Y5A3RHaZ4gIhIjbDgcO8ozkurSnujSIqjiI2deeTYPAePea1V63UerCsDy+narrT2SHwbGIR6soEuuHr8M5cbMPPfoWJjnAg5ZhPjfav5bq6bxpYlY7BS/cZBjLExRNo3nj9N57n0bIE3cnYiZfaTribdEIcVDa3xVb7fra1yg+KPWq8CX/hOVy7mIJ8PbXA6f1NJYMT4/4MYpQ3xr9VMkeSK+euXRkbWoxXk4qAExJNqTZsgsU1wwwWcKpzoWp7GT/Gob64WRv6K4fTsFJAQmvEkvLMpY6+OPt27Z6u1cyp7OAgyZlv8Ap9vrGyMVVt8cJdQ3U+saZUJCXSjGm9Q0Q+98upA2jPmDYHaxq+1unSTo9R5I27bC49jxlHm9612yw1txvWWNdX4j1fYl3WlVVTDUsnSqBJLNV4Z13bHrHZw101ADXIOzBf1jCou6n59QnCFftKxtkqSnWu6WlklqlWgesZJ1T6qu1saQUarC0NiqjByeyWqV7SvoMvgRh9ZQKLD2/j5XZaCorDQgd3jJF1ZC3E9HuLYEhESN/wAceqIcA7sviOO2UMwmHGPHHl+d87/TkzjP7YgYPgDJslyKWQzCytewpZazcnmLArm7WPHXZI9noVDiriPI2wuUNKkdIhAS1AcBVKYx+XjaR8lC9I4wPeVuq2OPijl/Td8d6gvVyHOEoOjj5SjWowZzsdfXSla6063srEs2IbbCK6NdUDiGuVWrgcnVRLjTmMrwzImmMxLVq/v92M44WJ36jKON8T7Z6rP9IP8ATco96c/QY9wx/Xfq8y3r1gzOsXi2nqm9stDjAOtWuOlDvtkiV7xhKEu4c/8AeOts2RLQtYuNilOuSlqvqM0vZqlQOxE/j17iAWN8QZUKNldQeRLBHL/L88obfrWo6+VrYrQCPW78/bJeDkjrmZa1V8I7BOV5Ya/ZNEL1qLUxfISb9qMq8neWcfrrZdw17S6Y13sliFBHlTli45RuokzEiFAuaPYY/Lwj6b9EuCri3O/Gykt+WMFh5m9+eBcp75Zb7ul7eWc2RLi7nnKfbtFG1ZpX0rdGWBt1HOOjuzi3ZfPoHbb1Ra7VISX1KpdurHZtv2TeLTNrs1mw8wsPyz7IByNPhf01OHMHZuR1/YQhCAoRGOERj/pyNwbx/wAmRka5rMo3G1+kLe6mRi6rZVe0qXXEPKNP3hY6Hs0cfxvYMO/XfR2/2FPxDyhc5jhHRdnl1qXpF3qzII21WtbrKnHvCmh8cYieorsvXH5//8QAPhAAAgECBQIEAwQIAwkAAAAAAQIDBBEABRITISIxFDJBUSAjYRUkM3EGEEJDUoGRsqGx4TRTYnODktHw8f/aAAgBAQANPwL4P/fX/Qfr95JFQf1NsD0eup7/APaHJ/wxbUtNHUASyAd9oPp3iO5WPUwXkgDn4QLkngADuT9B74U2tBDIw448+kKR9QcMCQdUFNDx7s7M39Ewh/HqKt5z7XttRhgOb2uBY8jESiTVSwRRb5PQ22/LxQxnqisjl3Uli6kLinhaRZY6jZilLxl4UkVljDq5I1lZA6WPBbkxyTJNBI0kPhEZCXuhramSWATOiwO9jdSJCdfRTBzULuRtOhV9MYZUct84FWiNusHpu1wI2V45F6JEYEMrKy2KujAEEEWIuuGKxUmfv+NT+iJmh/fQdvvv40XmqN1CZYnUMjKQysjC6srDgqQQQQbEG/6447GPeEW6+4oMIbsQBfWPUgo1gCHfb1xBxJpZh1DWnB5viKF5AdVr2IXR3Qnv79yo9cCP8CA2jpri0JAuAx51EPcl7hr8nEy2e/VrUqsRiIc2RSqjU1iSeV0d8aQqQxTvMxvYu80kzFdKMwtYgkjjoS+KdEjhenMu/UfMjj8OSgvUVFpQbSEgotrvGbGWupKaGPM1Ua3i1syTPTqGp5EdoYd3yGwWTXuE4qi1uuOTRIoW6F4iVtYghT1g6tXucSkR5FVStcwS+mWOzfuJT/sdz8qX7ut45YVixJ8mm/5jg9X/AE1Bf2JUD1xfUdY1c8+pNzz74p0eVtPA0xoWZjfgAKD3IH1xR/Klmla8lVNua5JljYIadDoICFAIgQi3Xku7PFIrWZkF1b0IFihsORyxXucTF5kgpy8nhY7qumQsQQDa4BcuR1touL0r6J6VF1SIjR6jJp51xedT6258tyJ0Hh20XjtF9373ADw2MYLngqNVmFxmlRUwSJXUwjrMt2TAjSTCDXuh5JXWInrl0Lpuwc4r56ithZwgmjqMrV4Xo5QQCsk0cmtFDvrityWjkBwjB0dCVZXWxVlYEFWBAII5GKb7jmY96uAL87j0qomjqOBZWkZB5MQBrKvqz2LMwIseAlvbn3x76VvjwdTvxyL0vDsvuoxDDgpqHcd+4xNXStNBHC8YhRTojiWRzr6B1EXdOoclr4iklgSjrIHUTRhY03EmjJ02beAvGQbg3HNrGMU+XyODJGQA25PpD24U7Q4ut2v2xFNUxVxaqooZapX6dZnZk+RNqk0Eky+USIOMZlAoyikjMkkuWVJjl3ZppAscEZ1uOmASRO41ta4UOXaKpG7UGGJ2CtLSSBha4AKJeYQF/mdR6KTLoqm9UJIpUrE07MESciWSdyd2Ua7arKeDh5XayUzhF1MTpW4tYXsPyx6agi/3MMZlSA9ckZ01lKxaIhAxIDQPUAkeYhPbj6fz/wDmPe/OJKGpj2BLtmRZYmjcCQg6bKzNcAniygsRiRUrKORZy9LLQ1ILwSrM6qys6J1rIgIfgXupKQFWqKl6vVJNFdqoaUpSvyJNwHZeTy9+CMU4Bnqcnmmlmjhd1jWfwtXDAZU3GVW2ptfLaUJFsZdWmgqMw/SGOsjqJqtdlnip8spgKhWHiIQPFPBfcHGkXwZpqZ44smraaNZ4VGqM1VQlVDDyRZ5Iypv0E4rFrpKA1M8dTU1L09V4KoMm2USOj34y8AKBp43jeMaZBimrqN5jYOlTaaComZVvpgpDBCq65Hd5SSkN5PmhBfk97d+QPTBWY6tbM3Ra3BFsLU0wqHCXtHI4Sb14+Wzc2Nvggij2cvj2koqp41EWhFsghlmUICxLa2jRboDcCDdd4ZcuVtyqbfmVo6yeOVHSRyroYSLqeXWxxFmNJmOZ1FTLSM7LRPv0tIkVI00YMlWkDuHMYCQtpR2fUmYwQ/a9E8qQS+Kol2ocwiMimGYSUoSnqFcwyp4OleMyXdAw1ReIzpdgXHDWpKStJHuFAJ7ah3xlk0LQVPESLMylap3D628K8jtMYAS5KRBTcXxFntZS5XKyxCWfKqFIaKCeXaAHz5YJ50BAbRKL37nbf0/4TjVUj/LAUen0+AWIP1VgRb63wIzNfRourszLZQSDbyE+ui9hfDV7PPNLUEtI6XU66MHVKqarBX0AWGkhsJeno5BDWQw1MKMqNNUGRDTrOZHUMv7BZV4vhKjjwlSlRBTyudU0aSRs6gBrkwA9BJHF7CqzA080ybI0x+EqW0aplco00qxhGjQygqD5dWEghtrdpG5QHqkkJd25uS5JOND/ANpwZagf4DBX4NP/AIxTJaXjnw7eZuObRnqI/gLH0w4WmrZKSRIaieEABTaUPTyyBCQGkQGxsrhgMB3barJoYIXd9sSbkFDYzi8QIScvEb35Y4Om0NLBFBF02424lCqbcFrX/njL6mLMkVblikKypLwOTdZb/l+WPDwf2Y0t/kceJnBH5pi3waDgra3vcc3HqPpghJZaGORN2At+IkSkiy/tCFyCgYGO62AK2GuOJY2fjvK0oVACe5J4/PF7rSQszon1lmNjIeLWQIg58/fBFv6ew9jbj6HFNTk0orElamqK9r+GpFgp3imkkqpegLAQRcysumN8VMnhJ4NqqqcqSYjUkq5iIdMNPMOPvWhoHuJCY7SvNUFoZqeRJoJVZDZo5Ii6yL9UJwsYB+n+o7E+pv8ABMsgpKUncrq+RRzFQ0aXmqHuVDEARRagZpI1OrBvEmxIpzmsHlMlTXDiihtf5NBZ/Rqp/T9IYPF09RLIWk+1aESN55CWZ56TePNydiMc4hla08ZCCaM9jICAEZLG9jbnAPcc8elz7kfn64hBCauqoq5rErS0VOp3aqqkPCxRg288jJGC4y93GT5QHuIA3Sa6tZTplzCde5HRAnyIONx5NVrnghzbQxNuSGA9r3IW3qu5Hk2XyHozJvL9tSwuDpjSzLRzARy1RJldnghgM360Uu0axbjAKNR0KgLubA2UAuT0gG4tFWT0GWUNQXQ5blVJK0VPRiBrbVRIVaaqWwJqJJWkvbHZVH8K+5/LucZbW01XSt3Xdp5FlVXFwWRwCkq+qMy4PVUQmllrafXbq2JqUO8kRPbehje1gR+1hlIStzRDl+VwvbhzCrPW1Vu+i1GD/vcEEQRnopKKFudmgo0tDTRdtWgXe15Hkk5wdCiOJS9RNJIyqqRIgdncswCKASTfT1G2NxKnLv0WmH3mqI6knztTzT03YjLT94l7VmxGGgmjVUjRFCoiKNKoiAAKqqAAoAAFgPh7pn2TlKPMddrKar5b0+YqOBatgmcINMMsXfA1bFPK/wBi5oqnnqjqnfL5GtYahXprIvtJwMAm8tNlVRmEA97VOXLUwEfUSHG3u+B+zqw1m323fC7O/t6uNWi1/XBPEk+U1GXU4+viMwWlp/5mQYuDJBHIuc5mVPdRFSmOgQ241HMHsT+E9jfSBJn2bFKvMe1j4foSnoF9LUcELkG0ry9/g//EACUQAQACAgIBAwUBAQAAAAAAAAEAESExEEFRIGHwcYGRobHRwf/aAAgBAQABPyHlUNmNLBf4/wBQBxb+MTyU/JiLA7YJ9V/uZE+1EhStNXsiRp4WutfPl8gmaaAFocAbgnOqT1WRWSN6bqkEwrm1rBdGOPmp8OS2giVOUyvtBQ0RgL5tTm82CIKRXLKzLfiZBAlLt5IAZcAgF9ONm+2U+lB3o/hffsLvnaxBHkFWdxJiCeT1UBHJpQA8qRF8RDety1LPEjmeuMNG1aIACH86kd5ggzg7tX7uDikAAfs+YWT4II4Jg7y1A35oCBfZde9x018cd9vU8cqVa9E/IruI8j1YbfAF3BgecAIh6yjlRgAjtKwbn5sgRAtsh8kDPARhXzrn7xPWSPuLeXMmzhARi7XwsxlEAJhWdvJWAHDybxMTtEiMLUyRACF8gIGodO0qiilcgmi8PAgAe3HB4KhpSa1rQigaN5v5n4SrDQ0+TFLYQo3P2faKSoeDrWjk/wAfZlF3O+7tfLO4PCa/A9YINjqJRx03EJAFXxGR9XABMkQvsKmzu7XXNt1ruI3AGqVDlfx/Cf8AWG31lU6fL8AaIKskdKI6aHRX/amGsGQZRLzot/dRlCiOd8FWPAB0bJIrTgEYertD6gieivtBXdEHvkGiRylK28rGAVGnKCwBbdDPYRzAUvCWJVb+0JsbWOkVhZMWd/AiYAIB7kxjVKUxCkZ5QByNIYyhA0MDEJEaXaDiu2Bu/vGKYQ+5fPqeMGKN05MUcOFwAazqIx/Gbtb39AsYp7YwfQSle9kAQCTr2x8wURAwjGKLkknICYMK0R3N1n0o+m7+oMwwSAOsr9Iq5SwsEhrMXtQ8t6TuVFGSt56+0E3hP7i3c4lmHALXCAQTKhId1taK5XYJKDinKDqwKjAp/wAVh3PVeINhpqoyP+s8ny9pDrX4xBXhTOrN53z5+dT5Q0ReiCRYMKApfzmt7ASZ8puPRzCsoGz9kShllkiAs3UybEIFikgqGgeL/YjfKg45VGEFoBd/IQCGWoCgbVdPkH3W5YXGp5NiABwQDk0ebiQHVJi/H/UZHnDyOxCB4DKC5875QVYoTEm8CHw+3sFDTAHKX8rr4kgEjLEx9c3PQABP9LU7Y/S9odwPtWub5KUEh3DuPr42dEEowyWkIiAusc99IGjESuxHyjAQFWxQobsERA6VbjkdmAiS/wAbKSWp+sUR6RwnIrahEkIcNHpUYxonOCQJgxroC0GEVDi2veeTRAI4yXxd8wIuT9Isq1wG7GDYgCgtG03ebQ+556Cd3//EACYQAQACAgEDAwUBAQAAAAAAAAEAESExQRBRYXGBkaGxweHw0SD/2gAIAQEAAT8Q6U6cXTreNUZa8aqJHBMBWndXn+1LMwXJeucWwzfi3d20Q7WrabaUV9PwRpalXdjTGMcYxekziZZ7iY2tGDtX+oOmUuntA0GLwZza/NeTr4q+DTQA1jvhN4LLvBe6oYrlTqyq9A+47cvV+1KTlR52jQDaUyk+Dxcu55YO/MOfAwnClu13tHguTWeb805S0rqtHEoNYREyA/bo4CggdGDKJmgBiOgTaDAMPJhB0W614LZtCaEIQiFxTCayu9g2WKwaJ6o4C5jIwEhSCXKrBjftrvu6Pk91RJlyZO6DJfk1D/GwAIEd4kQqb6aMSN9LmJsBIzZHwDVQRAYANrTYwPuWShABa3ti8SwMwMdMSIT8KCAAMoIelfQpY6R0JIbg9zT5eNYii8vBxZhAYN0r8CDmysB3re+Kh+HGXwFMfOBISWP7NCkZb5gIST/WQWDObtmCCgFBw0IsmhKpzs0j0uGDAGKLhoi2dQq0fCPsNK1rnCI6qBu9CXE25EAEANhQGQTcwwBIQOlmOn7x71+omT5JPR2O2RU8SFkQIGWziig6P116CW13ktyaHbhT4x5ziCUX5QCEBImM/iNbdZxyyMD+nlECJGlztpIAQDbfJpuupwIK4kJ0OaMMY/uEB13qkZF6LoCU4PboZCJIioyoYp5aHfutmczsvF1we+Jn8Sy3gMvgMYlrcFYDV7vbaMajBCwjzZWmDwZwXHIMz41QOVd5eTJ5c74aMJlaP5sEQqQmMRL/AMeEisYmeDvHtpxzEiOLLNLkbKgRWevlFLzYHeO5RXqC0AkWBQ0L0EwAHA0g94BjEZPz45hssrROjg9k/UhSsCAJpWM3zRzziBDIShFA5Wunw73Pk0UhAEzE4rlL1ggUc6AJOMCvB9OfcwRBO+GK6w7Jg6ftoQjldIutDtJCokUChsH3+dr4/XjAlhC/5+OZdKQPWK8Yrvx1HVvYOLd6K4rfxO4Rw0K9D1sDKHkXep46kAiKOamAGEDGJqlyLE8qJHmw4DR/DJiptAeqAKTuLZKhqrccvhOjPLxP6r9yi2qnyoffvCjHzJ1/j2iGLsuNtv4329J/O4JhVD8ygZNIAQoWGAPttnaGd6HeSqjlaH9uDH0aMCDQWADpOITg6qT0EDZ28b9vHMEGOacfIv8AHeC1NDn8D047RWtkFkqw35CvTudXXu+yMgFr0dnz/s1aftgEQ5+YAVkWIAFisZS5JZG9oCAx9MAGgOGMOIgRyV9dmMEfUemXdhZL4QQKuH1ZTDlGIk2nBXAYK+6IRjEaoCgOBmqANKUOensNApmz6FLXGcXPHj6hjJwDmF9uZQiYMIkOwGNgIkBtyilO/qaAAKCfaLQY5aFS8Hly2N5OaEFnFwf6BIv7qM6rk/wlAgBLgA+hDFsP/AHBR9a/+AHaFkrbYoJhxICggKLQqSiCUeAbAEwKgeQbsjE6lWK3W7VDTST0+iGmSaZ8MhkQYEDpKX0wAEFAYOHy94LDrTNi/JSlEAb0Vh4rBX/DCsUo1/LIvXW9LSMDKgLBmjsIvp3YQkZ4uCIqJ6qVgo+IvzDHgIgAuEC5YZomA4UEGmocxtvnX//EAD0RAAEDAwEEBgcFBwUAAAAAAAMBBAUCERMGACEjMRQzQVFTYQcIEBIVJENEY3OBszRCZXGDk6GjweHj8P/aAAgBAgEBPwDaLqSfkaIeDT4nKV3szZqIpuFz6xcS/ma/ai7asbn0SQIZ+sPxBxyhwyTM0iHN1WYAjIEN/wAZFTbRb7TupJRtEyEqfT9bhOtNHK8TqTG5dLCY30cWHNmQ1ksglXbT/q36S1LGPDxGvXkm4b8FXjOMbqyaPO0Jw5imLdbqoqXgFxb8t9tbaE1BoCWWLnWycVFVlIAVTspECLZDNz2SyjumYBsJwKtjBsURS7am1MGKOGP9zpGQWZ4nZh5CDz35lvmvyDfcmXaA1Q4iZR5JQNbxm8IHoYXjPMF4zM8whzBMG5uF+MubDh292NGJ1KTTkzwjwxjPJJ4bjGNwcqFMYymU6GzKtuWFUNmNzm2jP4f0uPehcs1DnUJjmzcYOZTMzKZDhUoRZVQxbGDmsq77erh6WXGgfSFp6PJJGHpfVhgs5hm8MYwQmeZmbOSzGDwcLz63gr4O2vdExeuoR5ByNKXcXOye2uaMe8gvQ8l4PI4EVM4M4TKimRaZmHeQUtIwsoJAyEU8cMXYlVLUlARaVqGtkyBKligMiWMKugiLarc903FSDit06Z5HFe7NmN3Yv8Jv8k8thaejY+SaVNhFbDwmKe5zmQxkMLDdDZr70zW7FDSvNE2dP9YyB5ZlTWYEeKTehAoGTPML542AQTWQyGW6WVbPN6J2JsCmlGxwStcy8Ki4DA6EDmYylCh8xl4wTm4PPwUXdv0+cMVTA9OCGQcx8lmeRpjZgvGbN4nBN9YOcC3uEyYcxuCHns69eA1Bgs2ulWbcnBCHpnTE+5D4P+22sPSfTr/UchqCRYfBJCtGzR0Jq1cUt3dTVvSMTsa1uK1qVW6CCSr3lvWHy9kTFDm5VhE1rjWQN0QRvBOfghNv7A5VLbluVO/bUTeYh9VSsLMNuhykfJPGcxhMY3zgTYTYcJsJuNxgm6nqTB2jThNIM5EYMoyh6GbqOmBMEKdiZ+CfCbszdSfqepjNMEoHRqipkYbR2ZI0Lw3UvTgQJjYeDhNhCUOfjeCHv21m1GKSjSe59sD+sH/3nsIC1gb1Kn0B80v+7+fs0hUtOqdPL/F2X6yJt61vowpYSlHpKhTY/ijxnDzzMPB+cw/JyWbwTBZhA8Cb7YEJuMYxtoZ1SJnRQTM4eENmzGzcH+Zjca3/AHJbs2BruqnScVpF5R8vHSTyYZmtmwrJBZhes8PXX+TCYX3xjbaxIQ7iNIPCQfTA+fI2zemuhu3p33QI727/AHU8vZRIuIczKQaUCI5bmEYKG8YS3RCInd2cRea27l1u9l9cBeN5p8Z44cXxKb9jZntmDhCHghCh+uw8YyXzG7NoWD1LQahk7hnjdG6pxzBQIP7yKoTdvUm7NmcZ0X3COOI4/wBEPl99/wAX2ZRVK1ZnFGQe7CEyX/rL59ydvn7VpSrml9q2whVpXQllXZOJSqVd/Zu2G2CNb00Ii+3/xAA9EQABAwMBBQQGBgoDAAAAAAADAQQFBhETAgAHFCEjMTNBQxASFSRRYQgiMmNzgQklQkRSU1Rks/CRtOH/2gAIAQMBAT8A2mGLynog09ONTRcO3xZnjwJQhTOuMPamVcq9mIP/ABtR2jRXQdbuBQyRgkVPbDyOkWkc7UVs6MzuwiIfDlRFXSLAvOxlxFtWsFVNNwrmYhogFT8Na7MMj7OMvWAFeqaPdADiQximzlFhQPjmDetPpXVpQszGMai3bNYcbxEPwUjJHSReRy3Ti2ZhhGHCVekE5WpUU4TBUXLlu73l0tvOhdMzTbz11HiSRjT2FJRpzJdBOwX5iLzwuw5gHRFxFyiMEW1C0G8qNs6ltBgtkbGQDLN2GPa5jJ8gXEgfidbp3K7VTTLd3TjaEqXQzdg1mCZ40dqF20eBZmCbEUJrBMv87mm1pJdTaLg2wWY2YQhZxrMPRCEPR6IQhwhZ4cOEOHzuj0c20G4fLIa2slHmbvBnwhMEITB6JsPWD3JsJjeSHomw9xt9Lzci03sbpKpdN4cLiuKLaPJim5JmEIXhuDULx5EBQJusGSjcwsPW98QPLN27sd6c3u0qGKqWHNfh+hJRqm6MvG5R8ZHO73TrdoTKnujsQXYuoFU1U1UEbVkBD1LCnQ8XORzSSZFVPrKF2LSVBk0oq4zAVVAcKrcJxFGv2ecVXNQQrMLGPfqBu3vhEgQL3pc5r5RL2l5+KrsatJyfjXnGmC8cDwhB0QhMEOE2bmHD4XCi+ObZo1olg2invDBcShI1mc/GGkuDMHgw5jGCbo4Qc/7PzvvtpPWdThcQgYZkJeYT8adFRABQTzCoAYcJggUz0y5UtdFWyraohGmNNQljnJotvKQ/ucyASCNGyTtmqKYOVVAbgnqKgswesoBAzGEiokf+jVg3YXMg8rudejHmMZWiQ4fvjW6Tvbd/ugZbpqTjKPhpZ/OxbbW9dszSp2BXbRHrwp3DOzYDUQg6XWs5hCQSLp0mXnzsm0jOEpuOfzg9ORItmZ6YH9WFoiHK3VLi77Di74Nr98Lt2pM1O1HR0POQD80hHykazkoHMEIc0aYITM1MHg+MWzPBmD0Td8E3nbVHHuI2GkIV0cyFbO+NDyfCZu2RjCFiVdaBRXgM4fE4bZgLhKlzylZaSM1ovTJsyu2F5l2zDh9pMwuDlCzM7VDIcIXhhPOCDhQJsTw3bbbd+6MWLmw+vy4M/wDh2OZRuHGlE87X4/P0VnoTXSVSaf44WR/6hdvoU75SPY/RurnmwXg4ONeTFNvDBCb9WmMHjIcwTBNm4M0kZ4z773MzwPRCzDtWDfU/k7MRNI+LGFQ8GzxBCa9usVmHoIZTJzMZF8lbovPYu70KVnOVm0J6khMxEbBSLMupBIZIg7s7B0huQsofaDoJc10wiGW9k2oEeAM2MiKMnBm7fwfD5f7bls416dbg+rTaymJ8/wBpfQSKBMNXjB0RdDRyAoT4e+wm6RVRPz7dt3kdB7u3Ua4gY0LNuzMHMb98eM+5NmeG6xjGDmw5jYQ+SEO0/UVJ6g65BjMM3BHHkhMpnn5BtmD+CYOz2RRwUyN+mAl7eBi3/wAN/j2/CyX2fSi6dCgba/rkSxzBW3JeSh7U77zvn4+lFXSt0Wy7Ddm1p6mpUVP9/LbVqx6b6e26Jz+exXJi/b1rb4Jy/wDfT//Z" alt="Kyle Mathews" style="margin-right:0.875rem;margin-bottom:0;width:3.5rem;height:3.5rem;" data-reactid="11"/><p data-reactid="12"><!-- react-text: 13 -->Written by <!-- /react-text --><strong data-reactid="14">Kyle Mathews</strong><!-- react-text: 15 --> who lives and works in San Francisco building useful things.<!-- /react-text --><!-- react-text: 16 --> <!-- /react-text --><a href="https://twitter.com/kylemathews" data-reactid="17">You should follow him on Twitter</a></p></div><ul style="display:flex;flex-wrap:wrap;justify-content:space-between;list-style:none;padding:0;" data-reactid="18"><li data-reactid="19"><a rel="prev" href="/blog/react/introduction-to-redux/" data-reactid="20"><!-- react-text: 21 -->← <!-- /react-text --><!-- react-text: 22 -->10 分钟理解 Redux<!-- /react-text --></a></li></ul></div><span style="display:block;clear:both;" data-reactid="23"> </span></div></div><script id="webpack-manifest">/*<![CDATA[*/window.webpackManifest={"231608221292675":"app-9f208c8e93b5ff271c6e.js","99219681209289":"component---node-modules-gatsby-plugin-offline-app-shell-js-5c4c5a0f7af9dc69d6d7.js","107818501498521":"component---src-templates-blog-post-js-443b4e797689934d1548.js","35783957827783":"component---src-pages-index-js-51039b9bbfc98abe9adb.js","60335399758886":"path----557518bd178906f8d58a.js","210333531512890":"path---offline-plugin-app-shell-fallback-a0e39f21c11f6a62c5ab.js","182731201813365":"path---react-react-ui-lib-theme-design-d78f49cd86b9008f0e7a.js","271790980202200":"path---react-introduction-to-redux-42ffebc26d5e9e9b7aa1.js","5845135763691":"path---my-second-post-9768c9323cb001e6424c.js","142629428675168":"path---index-b005545745a04eba37e2.js","114276838955818":"component---src-layouts-index-js-58b31e5739a45f38ba88.js"}/*]]>*/</script><script>
+  
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'undefined', 'auto');
+  </script><script>/*<![CDATA[*/!function(e,t,r){function n(){for(;d[0]&&"loaded"==d[0][f];)c=d.shift(),c[o]=!i.parentNode.insertBefore(c,i)}for(var s,a,c,d=[],i=e.scripts[0],o="onreadystatechange",f="readyState";s=r.shift();)a=e.createElement(t),"async"in i?(a.async=!1,e.head.appendChild(a)):i[f]?(d.push(a),a[o]=n):e.write("<"+t+' src="'+s+'" defer></'+t+">"),a.src=s}(document,"script",["/blog/commons-3cf304937523a964e309.js","/blog/app-9f208c8e93b5ff271c6e.js","/blog/path---react-react-ui-lib-theme-design-d78f49cd86b9008f0e7a.js","/blog/component---src-templates-blog-post-js-443b4e797689934d1548.js","/blog/component---src-layouts-index-js-58b31e5739a45f38ba88.js"])/*]]>*/</script></body></html>
