@@ -1,4 +1,578 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Whinc Blog]]></title><description><![CDATA[whinc's blog]]></description><link>https://whinc.github.io/blog/</link><generator>RSS for Node</generator><lastBuildDate>Sun, 21 Jan 2018 05:37:07 GMT</lastBuildDate><item><title><![CDATA[React组件库主题设计]]></title><description><![CDATA[讨论地址： 《React UI库主题设计》讨论 #1 基于 React 的 UI 组件库层出不穷，作为组件库很重要的一个功能就是实现主题换肤功能。通过组件库提供的主题定制接口，用户只需要修改一些组件的 UI…]]></description><link>https://whinc.github.io/blog//react/react-ui-lib-theme-design/</link><guid isPermaLink="false">https://whinc.github.io/blog//react/react-ui-lib-theme-design/</guid><pubDate>Wed, 15 Nov 2017 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;讨论地址：&lt;a href=&quot;https://github.com/whinc/blog/issues/1&quot;&gt;《React UI库主题设计》讨论 #1&lt;/a&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Whinc Blog]]></title><description><![CDATA[whinc's blog]]></description><link>https://whinc.github.io/blog/</link><generator>RSS for Node</generator><lastBuildDate>Sun, 21 Jan 2018 05:45:14 GMT</lastBuildDate><item><title><![CDATA[银行卡号/身份证号/手机号的组成及校验]]></title><description><![CDATA[本文总结了常见的银行卡号、身份证号和手机号的组成及校验方法，并提供了完整的示例代码。 1. 银行卡号（Bank Card Number） 平时生活中钱包里面充满了各种各样的卡，如信用卡、借记卡、礼品卡、会员卡和VIP卡等等，这些卡号并非随意定制的，都遵循国际标准  ISO/IEC…]]></description><link>https://whinc.github.io/blog//common/introduction-to-phone-card-id-no/</link><guid isPermaLink="false">https://whinc.github.io/blog//common/introduction-to-phone-card-id-no/</guid><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;本文总结了常见的银行卡号、身份证号和手机号的组成及校验方法，并提供了完整的示例代码。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2&gt;1. 银行卡号（Bank Card Number）&lt;/h2&gt;
+&lt;p&gt;平时生活中钱包里面充满了各种各样的卡，如信用卡、借记卡、礼品卡、会员卡和VIP卡等等，这些卡号并非随意定制的，都遵循国际标准 &lt;a href=&quot;https://en.wikipedia.org/wiki/ISO/IEC_7812&quot;&gt;ISO/IEC 7812&lt;/a&gt;，开发过程中接触到较多的是银行卡号，下面主要说下银行卡号的组成和校验。银行卡一般长下面这样：&lt;/p&gt;
+&lt;p&gt;
+  &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/bank-card-example-1726aa1bd4abe9cab25b98c1586433f7-ea699.jpg&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+  
+  &lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block; ; max-width: 234px; margin-left: auto; margin-right: auto;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 62.82051282051282%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAANABQDASIAAhEBAxEB/8QAGAAAAgMAAAAAAAAAAAAAAAAAAAQBAwX/xAAVAQEBAAAAAAAAAAAAAAAAAAAAAf/aAAwDAQACEAMQAAABz63ZhkZK/8QAHRAAAgIBBQAAAAAAAAAAAAAAAQIAAxIEERMUIv/aAAgBAQABBQIsccnmlJ4+vFo2aivz/8QAFBEBAAAAAAAAAAAAAAAAAAAAEP/aAAgBAwEBPwE//8QAFBEBAAAAAAAAAAAAAAAAAAAAEP/aAAgBAgEBPwE//8QAHhAAAgAGAwAAAAAAAAAAAAAAAAEREiExMkFRgaH/2gAIAQEABj8CTmubHV3MvCM0eh13wf/EABsQAQADAAMBAAAAAAAAAAAAAAEAEUEhMWGB/9oACAEBAAE/Iaos4LsgD39rH3We/CFJKSqMjGc4j//aAAwDAQACAAMAAAAQTM//xAAUEQEAAAAAAAAAAAAAAAAAAAAQ/9oACAEDAQE/ED//xAAUEQEAAAAAAAAAAAAAAAAAAAAQ/9oACAECAQE/ED//xAAdEAEBAAIBBQAAAAAAAAAAAAABEQAhMUGhwfDx/9oACAEBAAE/EKd0VsHKIaejnNc4iK1goOadfrABIt6vfJNKrITQeM//2Q==&apos;); background-size: cover; display: block;&quot;
+    &gt;
+      &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        style=&quot;width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px white;&quot;
+        alt=&quot;bank card example&quot;
+        title=&quot;&quot;
+        src=&quot;/static/bank-card-example-1726aa1bd4abe9cab25b98c1586433f7-ea699.jpg&quot;
+        srcset=&quot;/static/bank-card-example-1726aa1bd4abe9cab25b98c1586433f7-a5a9b.jpg 148w,
+/static/bank-card-example-1726aa1bd4abe9cab25b98c1586433f7-ea699.jpg 234w&quot;
+        sizes=&quot;(max-width: 234px) 100vw, 234px&quot;
+      /&gt;
+    &lt;/span&gt;
+  &lt;/span&gt;
+  
+  &lt;/a&gt;
+    &lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;银行卡号：&lt;strong&gt;6225768888888888&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3&gt;1.1 卡号组成&lt;/h3&gt;
+&lt;p&gt;银行卡号一般是 16 位（信用卡/借记卡）或 19 位（借记卡）&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-none&quot;&gt;&lt;code&gt;  /--MII      
+_/     /--IIN(BIN)
+      /     /--个人账户标识，长度 6-12 位
+_____/ ____/ _/--校验位
+622576 8...8 8&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;第 1 位&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;卡号首位表示主要产业标识符(&lt;a href=&quot;https://en.wikipedia.org/wiki/ISO/IEC_7812&quot;&gt;Major Industry Identifie, MII&lt;/a&gt;)，由国际标准化组织于1989年首次发布，通过该值可以区分卡号的发行者所属行业，所有取值见下表：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;卡号首位&lt;/th&gt;
+&lt;th&gt;发行者类别&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;0&lt;/td&gt;
+&lt;td&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/ISO/TC_68&quot;&gt;ISO/TC 68&lt;/a&gt;
+及其他行业&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;航空&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;td&gt;航空、金融和其他未来行业&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;3&lt;/td&gt;
+&lt;td&gt;旅游和娱乐业&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;4&lt;/td&gt;
+&lt;td&gt;银行业和金融业&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;5&lt;/td&gt;
+&lt;td&gt;银行业和金融业&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;6&lt;/td&gt;
+&lt;td&gt;商业和银行金融业&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;7&lt;/td&gt;
+&lt;td&gt;使用和其他未来行业&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;8&lt;/td&gt;
+&lt;td&gt;医疗、电信和其他未来行业&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;9&lt;/td&gt;
+&lt;td&gt;国家标准机构&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;第 1-6 位&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;卡号前 6 位表示发行者标识代码(&lt;a href=&quot;https://en.wikipedia.org/wiki/Payment_card_number#Issuer_identification_number_.28IIN.29&quot;&gt;Issuer Identification Number, IIN&lt;/a&gt;)，也称位发卡行识别码(Bank Identification Number, BIN)，包含第 1 位产业标识符 MII，通过 IIN 可以区分卡号的发行机构。&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;发布网&lt;/th&gt;
+&lt;th&gt;IIN 范围&lt;/th&gt;
+&lt;th&gt;长度&lt;/th&gt;
+&lt;th&gt;校验算法&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;中国银联(China UnionPay)&lt;/td&gt;
+&lt;td&gt;62&lt;/td&gt;
+&lt;td&gt;16-19&lt;/td&gt;
+&lt;td&gt;Luhn algorithm&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;美国运通(American Express)&lt;/td&gt;
+&lt;td&gt;34,37&lt;/td&gt;
+&lt;td&gt;15&lt;/td&gt;
+&lt;td&gt;Luhn algorithm&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Visa&lt;/td&gt;
+&lt;td&gt;4&lt;/td&gt;
+&lt;td&gt;13,16,19&lt;/td&gt;
+&lt;td&gt;Luhn algorithm&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Payment_card_number#Issuer_identification_number_.28IIN.29&quot;&gt;more…&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;.&lt;/td&gt;
+&lt;td&gt;.&lt;/td&gt;
+&lt;td&gt;.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;第 7-X 位(长度可变，6-12位)&lt;/strong&gt;
+除去卡号前 6 位和最后 1 位，中间数字表示个人账号标识，中间数字由发行机构自定义，由6-12位数字组成。每个银行的个人账号标识规则有所不同。有的银行在这部分内容中会包含分行、支行、储蓄网点等代码信息。有得银行可能就没有这么详细，会使用自然流水顺序码。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;最后 1 位&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;最后 1 位表示校验位，由卡号前面的数字(不含最后 1 位)采用&lt;a href=&quot;https://en.wikipedia.org/wiki/Luhn_algorithm&quot;&gt;Luhn算法&lt;/a&gt;计算得出。&lt;/p&gt;
+&lt;h3&gt;1.2 卡号校验&lt;/h3&gt;
+&lt;p&gt;卡号的最后一位都是通过&lt;a href=&quot;https://en.wikipedia.org/wiki/Luhn_algorithm&quot;&gt;Luhn算法&lt;/a&gt;进行计算或校验。luhn 算法也称为“mod 10”算法(源于算法最后一步操作是模10)，它是一个简单的 checksum 算法。使用 luhn 算法校验的数字串，最后一位是校验位，使用 luhn 算法可校验数字串是否有效。&lt;/p&gt;
+&lt;p&gt;其具体算法步骤如下：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;从待校验的数字串的最右侧（校验位）开始，向左遍历，奇数位数字累加，偶数位数字进行下面处理后的结果累加
+1.1 偶数位数字乘以 2 后，如果结果大于 9，则将结果的个位和十位相加后返回（16: 1+6=7），否则返回结果&lt;/li&gt;
+&lt;li&gt;上一步累加的结果模 10 后，如果结果为 0，则数字串是有效的，否则是无效的&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;假设数字串为&lt;code&gt;7992739871x&lt;/code&gt;（&lt;code&gt;x&lt;/code&gt;是校验位），下面是算法第 1 步的计算过程示例：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;数字串&lt;/th&gt;
+&lt;th&gt;7&lt;/th&gt;
+&lt;th&gt;9&lt;/th&gt;
+&lt;th&gt;9&lt;/th&gt;
+&lt;th&gt;2&lt;/th&gt;
+&lt;th&gt;7&lt;/th&gt;
+&lt;th&gt;3&lt;/th&gt;
+&lt;th&gt;9&lt;/th&gt;
+&lt;th&gt;8&lt;/th&gt;
+&lt;th&gt;7&lt;/th&gt;
+&lt;th&gt;1&lt;/th&gt;
+&lt;th&gt;x&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;乘以2&lt;/td&gt;
+&lt;td&gt;7&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;18&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;9&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;4&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;7&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;6&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;9&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;16&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;7&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;2&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;x&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;处理&lt;/td&gt;
+&lt;td&gt;7&lt;/td&gt;
+&lt;td&gt;9&lt;/td&gt;
+&lt;td&gt;9&lt;/td&gt;
+&lt;td&gt;4&lt;/td&gt;
+&lt;td&gt;7&lt;/td&gt;
+&lt;td&gt;6&lt;/td&gt;
+&lt;td&gt;9&lt;/td&gt;
+&lt;td&gt;7&lt;/td&gt;
+&lt;td&gt;7&lt;/td&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;td&gt;x&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;luhn 校验算法的 JavaScript 实现如下：&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-javascript&quot;&gt;&lt;code&gt;&lt;span class=&quot;token comment&quot;&gt;/**
+ * luhn check algorightm
+ * @param {string} input - card NO
+ * @returns {boolean} return true if input is valid, otherwise return false
+ */&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;luhnCheck&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;input&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;var&lt;/span&gt; sum &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;var&lt;/span&gt; i &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; input&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;length &lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; i &lt;span class=&quot;token operator&quot;&gt;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;--&lt;/span&gt;i&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;token keyword&quot;&gt;var&lt;/span&gt; digit &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;parseInt&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;input&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;i&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;i &lt;span class=&quot;token operator&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;digit &lt;span class=&quot;token operator&quot;&gt;&amp;lt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;9&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+            sum &lt;span class=&quot;token operator&quot;&gt;+=&lt;/span&gt; digit   
+        &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+            sum &lt;span class=&quot;token operator&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;digit &lt;span class=&quot;token operator&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;10&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;parseInt&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;digit &lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; sum &lt;span class=&quot;token operator&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;10&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;p&gt;上面的校验算法仅校验卡号是否符合规则，实际应用还需要根据具体场景校验卡号的开头位和长度等，下面是银联卡号完整的校验函数：&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-javascript&quot;&gt;&lt;code&gt;&lt;span class=&quot;token comment&quot;&gt;// return true if input is a valid bank card no, otherwise return false&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;checkBankCardNo&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;input&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token regex&quot;&gt;/^62(\d{14}|\d{17})$/&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;input&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;luhnCheck&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;input&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;p&gt;上面两段代码的在线示例：&lt;a href=&quot;https://runkit.com/whinc/luhn-check-algorithm&quot;&gt;https://runkit.com/whinc/luhn-check-algorithm&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;参考：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Payment_card_number&quot;&gt;Payment card number | wikipedia&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Luhn_algorithm&quot;&gt;Luhn algorithm | wikipedia&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.zhihu.com/question/20880750#answer-4771564&quot;&gt;银行卡号各个数字是什么含义？ | 知乎&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;2. 身份证号（ID Card Number）&lt;/h2&gt;
+&lt;p&gt;中国居民身份证&lt;/p&gt;
+&lt;p&gt;
+  &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/id-card-example-144967b174fb520123a7da549344d982-28feb.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+  
+  &lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block; ; max-width: 299px; margin-left: auto; margin-right: auto;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 69.23076923076923%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAOCAYAAAAvxDzwAAAACXBIWXMAAAsSAAALEgHS3X78AAADtklEQVQ4yyWT3U+TZxjGe+6/sPP9A1uy7WjZEg+2mOxg7mTIyviSyVSELFswCs7NgxnFIWbOgOJAsIVWwEILbcf3xwot/aCUlpfyvm/ffrxtKS0IKFl+e3AHd57keXL/cuW6rsdguvk5tq4fsHU2Y3/YhL2jHntbLeN3a3HdrcLdVomrrQJ3ew3O+xfEfY14r2H09++xtV/A/qAeR/ePjPTc5ElrBYaxZz8Tye4SzRXZzJeIZwskUln0RJKirFDUNPayOvu5LKV0mh1dJ5kvEC/uEX91iHx0hHp0SOL1MfPzbgyu57+xni3i3swwK6WY9wdxTc+yMDXJfiJBMSmAelpAM5QEOJfR0XIFpPwusRPw3j7KwSHK0Rv+cZgw9N9vYU3fZWY7w9x2ikBCZXUjQiwcpiDLFBWFkoCW0kl2hdpCLkcoEmP8wS+Y689g7+1B2t0n8eYYm+kJhrbmBnzpAo+9Kt2eTZyeRZaiG0yEFIbcyyxMTlHMpCjmsxQ0laJQ5LVbCHX+ivTouoB+hW89hHr8L+OmLgym2z/hT+8wGtUY30ywGNvA5fOxuB4hfDLCgnAghCzJlFJJdgQwNjGAo/USc7ca6Dj7MYtO21sPl0d7ToDNBFJ53FtpFuQ03sgGcyt+AutRIsEgsVCIsM+PKsVFQAr5Ygl5wow+1M3avav8fflL1kQY6sERTrNQOHCrkVUtR/+qysiaikME0j9opb+vj77HXQyIsfb8xeigCcewldVVH0lZQhcqfVfrcLfWE1NlAXzNgkUAr9VXCaBOIJnDL6piF8AR+zgjQ0M4X7wguuyhoCpkt7fQlW0RSoYlX5ixrg4Cdy5y6bNPGLS72No7YNbSiaG3pQGvkhbADAFVY8kfYt6zwsL0NIGZaZRggB0tQUbe5lU+j7n7ER+cPsup6xberbvHqXc+5cP33sdsG8b09CGGpy1NrIi6BNUUa2qSmJZkS1RHliRS4XX0SARd2kSPS+SEQu/CPI6xEay+EKbpFaFukvEpF3MiwJc9AnjeaGQxKnPH7qexz0PrsJeWAQ+DzmV87glG+59j7T3x0MzLkxE2WE88HrTwzDrE6Mw8AVkjmMnh6BXAlou1ArjNUiyOJ6bgi8ZFcSWR7hqK348WCKKJomvR6P8jCp8Qd/GAn0h4g+DGFl6xsyIlMP/ZLn5K4xfUVBix3G7iRtN3VFZUUPWNkcrycmrPlXG+7Guaa6qoKz/HlepKcZbRWPUtVyqNNFRXc+Ny/dudP641YTz9Ef8BNUGD2nyZONcAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+    &gt;
+      &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        style=&quot;width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px white;&quot;
+        alt=&quot;id card example&quot;
+        title=&quot;&quot;
+        src=&quot;/static/id-card-example-144967b174fb520123a7da549344d982-28feb.png&quot;
+        srcset=&quot;/static/id-card-example-144967b174fb520123a7da549344d982-58d0d.png 148w,
+/static/id-card-example-144967b174fb520123a7da549344d982-bd2b0.png 295w,
+/static/id-card-example-144967b174fb520123a7da549344d982-28feb.png 299w&quot;
+        sizes=&quot;(max-width: 299px) 100vw, 299px&quot;
+      /&gt;
+    &lt;/span&gt;
+  &lt;/span&gt;
+  
+  &lt;/a&gt;
+    &lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;身份证号：&lt;strong&gt;11204416541220243X&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3&gt;2.1 卡号组成&lt;/h3&gt;
+&lt;p&gt;身份证号码一共有18位数字，各位数字代表的含义：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;第&lt;code&gt;1,2&lt;/code&gt;位数字表示：所在省份的代码； &lt;/li&gt;
+&lt;li&gt;第&lt;code&gt;3,4&lt;/code&gt;位数字表示：所在城市的代码； &lt;/li&gt;
+&lt;li&gt;第&lt;code&gt;5,6&lt;/code&gt;位数字表示：所在区县的代码；&lt;/li&gt;
+&lt;li&gt;第&lt;code&gt;7-14&lt;/code&gt;位数字表示：出生年、月、日； &lt;/li&gt;
+&lt;li&gt;第&lt;code&gt;15,16&lt;/code&gt;位数字表示：所在地的派出所的代码；&lt;/li&gt;
+&lt;li&gt;第&lt;code&gt;17&lt;/code&gt;位数字表示性别：奇数表示男性，偶数表示女性； &lt;/li&gt;
+&lt;li&gt;第&lt;code&gt;18&lt;/code&gt;位数字是校检码：根据前面十七位数字码，按照ISO 7064:1983.MOD 11-2校验码计算出来的校验码，取值 0-10（10 用 X 表示）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-none&quot;&gt;&lt;code&gt;     /-省份代码      /-出生年月日(YYYYMMDD）
+    /  /-城市代码   /  /-所在地派出所代码
+   /  /  /-区县代码/  / /-性别(奇-男，偶-女)
+__/__/__/________/__/_/_/-校验位
+11 20 44 16541220 24 3 X&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;省市区(县)代码&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;我们把身份证前六位地址码码，按ABCDEF表示。&lt;/p&gt;
+&lt;p&gt;AB 表示身份证主人所在的省(直辖市、自治区、特别行政区)代码。&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-none&quot;&gt;&lt;code&gt;11-15 京 津 冀 晋 蒙
+21-23 辽 吉 黑
+31-37 沪 苏 浙 皖 闽 赣 鲁
+41-46 豫 鄂 湘 粤 桂 琼
+50-54 渝 川 贵 云 藏
+61-65 陕 甘 青 宁 新
+81-82 港 澳&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;p&gt;CD 表示地区代码（地级），省的城市代码从省会开始排，只有地级城市有独立的城市代码，而县级市没有。&lt;/p&gt;
+&lt;p&gt;EF 表示为县区代码（市辖区、郊区、郊县、县级市）。&lt;/p&gt;
+&lt;p&gt;例如，广东省深圳市南山区，对应的身份证前 6 位是&lt;code&gt;440305&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;完整的全国省市区（县）代码可以参考中华人民共和国国家统计局&lt;a href=&quot;http://www.stats.gov.cn/tjsj/tjbz/xzqhdm/201703/t20170310_1471429.html&quot;&gt;最新县及县以上行政区划代码（截止2016年7月31日）&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;出生日期&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;按照格式&lt;code&gt;YYYYMMDD&lt;/code&gt;表示，例如公历一九九一年一月一日出生对应的日期为&lt;code&gt;19910101&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;派出所代码&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;暂未查到官方的派出所代码出处，如果你知道，恳请在评论里告诉我。&lt;/p&gt;
+&lt;h3&gt;2.2 身份证校验&lt;/h3&gt;
+&lt;p&gt;身份证号最后一位使用ISO 7064:1983.MOD 11-2算法得出，其算法很简单，一句话描述：将每位数字与其对应的权重的乘积之和模11后查表。具体的计算过程见下面：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;第一步：计算权重之和&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;每位数字拥有不同的权重&lt;code&gt;Wi&lt;/code&gt;，其计算方法如下：&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-none&quot;&gt;&lt;code&gt;c = ∑(ai·Wi) mod 11, i=(1, 18], i ∈ N&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;p&gt;公式说明：
+&lt;code&gt;i&lt;/code&gt;:表示号码字符从右至左（包括校验码在内）的位置序号，最右侧数字 i 为 1，计算时不包含最侧的校验位；
+&lt;code&gt;ai&lt;/code&gt;:表示第&lt;code&gt;i&lt;/code&gt;位置上的号码字符值；
+&lt;code&gt;Wi&lt;/code&gt;:示第&lt;code&gt;i&lt;/code&gt;位置上的加权因子，其数值依据公式&lt;code&gt;Wi=2^(i-1）mod 11&lt;/code&gt;计算得出。 &lt;/p&gt;
+&lt;p&gt;由于身份证号固定 18 位，可以预先计算出所有权重值，后续查表加快校验过程。&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;i&lt;/th&gt;
+&lt;th&gt;18&lt;/th&gt;
+&lt;th&gt;17&lt;/th&gt;
+&lt;th&gt;16&lt;/th&gt;
+&lt;th&gt;15&lt;/th&gt;
+&lt;th&gt;14&lt;/th&gt;
+&lt;th&gt;13&lt;/th&gt;
+&lt;th&gt;12&lt;/th&gt;
+&lt;th&gt;11&lt;/th&gt;
+&lt;th&gt;10&lt;/th&gt;
+&lt;th&gt;9&lt;/th&gt;
+&lt;th&gt;8&lt;/th&gt;
+&lt;th&gt;7&lt;/th&gt;
+&lt;th&gt;6&lt;/th&gt;
+&lt;th&gt;5&lt;/th&gt;
+&lt;th&gt;4&lt;/th&gt;
+&lt;th&gt;3&lt;/th&gt;
+&lt;th&gt;2&lt;/th&gt;
+&lt;th&gt;1&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Wi&lt;/td&gt;
+&lt;td&gt;7&lt;/td&gt;
+&lt;td&gt;9&lt;/td&gt;
+&lt;td&gt;10&lt;/td&gt;
+&lt;td&gt;5&lt;/td&gt;
+&lt;td&gt;8&lt;/td&gt;
+&lt;td&gt;4&lt;/td&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;6&lt;/td&gt;
+&lt;td&gt;3&lt;/td&gt;
+&lt;td&gt;7&lt;/td&gt;
+&lt;td&gt;9&lt;/td&gt;
+&lt;td&gt;10&lt;/td&gt;
+&lt;td&gt;5&lt;/td&gt;
+&lt;td&gt;8&lt;/td&gt;
+&lt;td&gt;4&lt;/td&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;第二步：将上一步结果模 11 后查表&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;计算出&lt;code&gt;c&lt;/code&gt;后，根据下表查出对应的校验码：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;j&lt;/th&gt;
+&lt;th&gt;0&lt;/th&gt;
+&lt;th&gt;1&lt;/th&gt;
+&lt;th&gt;2&lt;/th&gt;
+&lt;th&gt;3&lt;/th&gt;
+&lt;th&gt;4&lt;/th&gt;
+&lt;th&gt;5&lt;/th&gt;
+&lt;th&gt;6&lt;/th&gt;
+&lt;th&gt;7&lt;/th&gt;
+&lt;th&gt;8&lt;/th&gt;
+&lt;th&gt;9&lt;/th&gt;
+&lt;th&gt;10&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Q&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;0&lt;/td&gt;
+&lt;td&gt;X&lt;/td&gt;
+&lt;td&gt;9&lt;/td&gt;
+&lt;td&gt;8&lt;/td&gt;
+&lt;td&gt;7&lt;/td&gt;
+&lt;td&gt;6&lt;/td&gt;
+&lt;td&gt;5&lt;/td&gt;
+&lt;td&gt;4&lt;/td&gt;
+&lt;td&gt;3&lt;/td&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;上面的表格是通过下面公式计算出来的：&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-none&quot;&gt;&lt;code&gt;Q = (12-j) mod 11, j=[0, 10], j ∈ N&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;p&gt;算法的 JavaScript 实现如下：&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-javascript&quot;&gt;&lt;code&gt;&lt;span class=&quot;token comment&quot;&gt;/**
+ * Check input ID card no. is valid or not
+ * @param {string} input - ID card no.
+ * @returns return true if input card no. is valid, otherwise return false 
+ */&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;checkIDCardNo&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;input&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;  &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;var&lt;/span&gt; sum &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;var&lt;/span&gt; W &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;9&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;9&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;var&lt;/span&gt; Q &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;10X97865432&apos;&lt;/span&gt;
+    
+    &lt;span class=&quot;token keyword&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;var&lt;/span&gt; i &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; i &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt; input&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;length &lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;++&lt;/span&gt;i&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        sum &lt;span class=&quot;token operator&quot;&gt;+=&lt;/span&gt; input&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;i&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt; W&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;i&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+    
+    &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; Q&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;sum &lt;span class=&quot;token operator&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;11&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; input&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;i&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;p&gt;上面的校验算法仅身份证号是否符合 MOD 11 校验规则，实际应用还需要校验卡号的长度和类型，下面是身份证号完整的校验函数：&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-javascript&quot;&gt;&lt;code&gt;&lt;span class=&quot;token comment&quot;&gt;// return true if input is a valid ID card no., otherwise return false&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;checkIDCardNo2&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;input&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token regex&quot;&gt;/^\d{17}(\d|X)$/&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;input&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;checkIDCardNo&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;input&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;p&gt;上面两段代码的在线示例：&lt;a href=&quot;https://runkit.com/whinc/5a31213aeb0c1a0011c3af56&quot;&gt;https://runkit.com/whinc/5a31213aeb0c1a0011c3af56&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;参考：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Resident_Identity_Card&quot;&gt;Resident Identity Card | wikipedia&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Resident_Identity_Card#Identity_card_number&quot;&gt;Identity Card Number | wikipeida&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;3 手机号（Phone Number）&lt;/h2&gt;
+&lt;p&gt;中国手机号示例：&lt;code&gt;15975383481&lt;/code&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;电话号码分座机号和移动手机号，二者规则不同，这里只讨论移动手机号&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3&gt;3.1 手机号组成&lt;/h3&gt;
+&lt;p&gt;中国使用的手机号码为11位，使用 MDN 结构&lt;code&gt;CC + MAC + H0 H1 H2 H3 + ABCD&lt;/code&gt;，各字段含义如下：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;CC&lt;/code&gt;：国家码
+&lt;code&gt;MAC&lt;/code&gt;：移动接入码，用于区分运营商
+&lt;code&gt;H0H1H2H3&lt;/code&gt;：HLR(Home Location Register) 归属识别码，由运营商统一分配，每个移动运营商会为全国的地级市编上一个四位数代码，用于识别手机归属地
+&lt;code&gt;ABCD&lt;/code&gt;：移动用户号，由各 HLR 自行分配，用于区分同一地区不同用户&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-none&quot;&gt;&lt;code&gt;     /-CC
+    /   /-MAC
+   /   /    /-HLR
+__/___/____/____/-ABCD
+86 134 1234 1234&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;p&gt;中国大陆号码开头的含义及说明（不一定完整，仅作了解）：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;开头&lt;/th&gt;
+&lt;th&gt;含义&lt;/th&gt;
+&lt;th&gt;说明&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;10&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;电信服务号&lt;/td&gt;
+&lt;td&gt;10010中国联通服务中心，10050中国铁通服务中心，10060中国网通服务中心，10070中国卫通服务中心，10086中国移动服务中心等。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;11&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;特种服务号&lt;/td&gt;
+&lt;td&gt;如110匪警，111电信内部测试，112报修，113、115国内人工长途挂号，114查号台，116国内人工长途查询，117报时，119火警等。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;12&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;特殊民用号&lt;/td&gt;
+&lt;td&gt;如120（医院），121（天气预报），122交通事故告警，12312保护知识产权举报中心，12315消费投诉热线，12319城建服务，12348法律咨询，12358价格举报中心，12365质量监督，12366纳税服务，12369环境保护投诉。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;13&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;通信号码段&lt;/td&gt;
+&lt;td&gt;130-133 归属中国联通，134-139 归属中国移动&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;14&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;.&lt;/td&gt;
+&lt;td&gt;.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;15&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;通信号码段&lt;/td&gt;
+&lt;td&gt;153 归属中国联通，158-159 归属中国移动&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;16&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;声讯类号码&lt;/td&gt;
+&lt;td&gt;如160中国电信工人信息服务接入码，166务，167吉通计算机互联网业务接入码，168声讯服务，中国电信公众多媒体网接入码等。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;17&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;长途电话服务&lt;/td&gt;
+&lt;td&gt;如170国内长途全自动话费查询台，173国内立接制长途半自动挂号台，176国内长途半自动查询台，177国内长途半自动班长台，179 IP语音服务接入码等。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;18&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;通信号码段，服务号&lt;/td&gt;
+&lt;td&gt;如180邮政服务，184邮政编码查询接入码，185国家邮政局电话信息服务接入码，186移动服务中心，188固定电话交费台，189中国电信业务受理特服台等。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;19&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;寻呼接入&lt;/td&gt;
+&lt;td&gt;191联通无线电人工寻呼接入码，192联通无线电自动寻呼接入码等等。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;20&lt;/code&gt;
+,
+&lt;code&gt;30&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;电话卡服务&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;8&lt;/code&gt;
+,
+&lt;code&gt;9&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;电信及民用服务号&lt;/td&gt;
+&lt;td&gt;95501深圳发展银行，95502永安财产保险，95505天安保险，95508广州发展银行&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3&gt;3.2 手机号的校验&lt;/h3&gt;
+&lt;p&gt;根据上面表格整理的号码含义，可制定下面校验规则：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;号码长度为 11 位&lt;/li&gt;
+&lt;li&gt;号码首位是&lt;code&gt;1&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;号码的第 2 位可以是&lt;code&gt;3,4,5,7,8&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-javascript&quot;&gt;&lt;code&gt;&lt;span class=&quot;token comment&quot;&gt;/**&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;check is input phone no. is valid&lt;/li&gt;
+&lt;li&gt;@param {string} input - input phone no.&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;@returns return true if input is a valid phone no., otherwise return false
+*/
+function checkPhoneNo(input) {
+return /^1&lt;a href=&quot;&quot;&gt;3|4|5|7|8&lt;/a&gt;\d{8}$/.test(input)
+}&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-none&quot;&gt;&lt;code&gt;&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;上面代码的在线示例：&lt;a href=&quot;https://runkit.com/whinc/5a3274f8c8531200128328a7&quot;&gt;https://runkit.com/whinc/5a3274f8c8531200128328a7&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;参考&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Telephone_numbers_in_China&quot;&gt;Telephone numbers in China | wikipedia&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://baike.sogou.com/v23265397.htm?fromTitle=%E6%89%8B%E6%9C%BA%E5%8F%B7%E7%A0%81&quot;&gt;手机号码 | 搜狗百科&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.360doc.com/content/12/0620/01/5733130_219320179.shtml&quot;&gt;手机、电话号码编码组成及号段分配&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;4. 小结&lt;/h2&gt;
+&lt;p&gt;本文总结了常见的银行卡号、身份证号和手机号的组成及校验方法，并提供了完整的示例代码。&lt;/p&gt;</content:encoded></item><item><title><![CDATA[React组件库主题设计]]></title><description><![CDATA[讨论地址： 《React UI库主题设计》讨论 #1 基于 React 的 UI 组件库层出不穷，作为组件库很重要的一个功能就是实现主题换肤功能。通过组件库提供的主题定制接口，用户只需要修改一些组件的 UI…]]></description><link>https://whinc.github.io/blog//react/react-ui-lib-theme-design/</link><guid isPermaLink="false">https://whinc.github.io/blog//react/react-ui-lib-theme-design/</guid><pubDate>Wed, 15 Nov 2017 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;讨论地址：&lt;a href=&quot;https://github.com/whinc/blog/issues/1&quot;&gt;《React UI库主题设计》讨论 #1&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;基于 React 的 UI 组件库层出不穷，作为组件库很重要的一个功能就是实现主题换肤功能。通过组件库提供的主题定制接口，用户只需要修改一些组件的 UI 参数，就可以达到修改整个组件库样式。&lt;/p&gt;
 &lt;p&gt;目标：可定制性强，并且易学易用。&lt;/p&gt;
 &lt;h2&gt;一种简单的主题设计方案&lt;/h2&gt;
@@ -674,10 +1248,283 @@ store&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span clas
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&quot;http://cn.redux.js.org/index.html&quot;&gt;redux 中文文档&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;http://imweb.io/topic/57711e37f0a5487b05f325b5&quot;&gt;浅谈 React、Flux 与 Redux&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content:encoded></item><item><title><![CDATA[My Second Post!]]></title><description><![CDATA[Wow! I love blogging so much already. Did you know that “despite its name, salted duck eggs can also be made from
-chicken eggs, though the…]]></description><link>https://whinc.github.io/blog//my-second-post/</link><guid isPermaLink="false">https://whinc.github.io/blog//my-second-post/</guid><pubDate>Wed, 06 May 2015 23:46:37 GMT</pubDate><content:encoded>&lt;p&gt;Wow! I love blogging so much already.&lt;/p&gt;
-&lt;p&gt;Did you know that “despite its name, salted duck eggs can also be made from
-chicken eggs, though the taste and texture will be somewhat different, and the
-egg yolk will be less rich.”?
-(&lt;a href=&quot;http://en.wikipedia.org/wiki/Salted_duck_egg&quot;&gt;Wikipedia Link&lt;/a&gt;)&lt;/p&gt;
-&lt;p&gt;Yeah, I didn’t either.&lt;/p&gt;</content:encoded></item></channel></rss>
+&lt;/ul&gt;</content:encoded></item><item><title><![CDATA[动手实现 Promise]]></title><description><![CDATA[前言 为了增强对 ES6  Promise 工作方式的理解，我实现了一个自己的 ES6Promise 类，接口与 ES6 的 Promise 类一致（包含构造函数、 then 、 catch 、 resolve 、 reject ）， 并且符合  Promise/A…]]></description><link>https://whinc.github.io/blog//ECMAScript/implematiation-of-promise/</link><guid isPermaLink="false">https://whinc.github.io/blog//ECMAScript/implematiation-of-promise/</guid><pubDate>Sun, 15 Jan 2017 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;前言&lt;/h2&gt;
+&lt;p&gt;为了增强对 ES6 &lt;code&gt;Promise&lt;/code&gt;工作方式的理解，我实现了一个自己的&lt;code&gt;ES6Promise&lt;/code&gt;类，接口与 ES6 的&lt;code&gt;Promise&lt;/code&gt;类一致（包含构造函数、&lt;code&gt;then&lt;/code&gt;、&lt;code&gt;catch&lt;/code&gt;、&lt;code&gt;resolve&lt;/code&gt;、&lt;code&gt;reject&lt;/code&gt;）， 并且符合 &lt;a href=&quot;https://promisesaplus.com/&quot;&gt;Promise/A+ 规范&lt;/a&gt; 。下面从简单开始，一步步实现一个自己的&lt;code&gt;Promise&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;下面是最终实现的&lt;code&gt;ES6Promise&lt;/code&gt;使用示例：&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-javascript&quot;&gt;&lt;code&gt;&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;ES6Promise&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;./es6-promise&apos;&lt;/span&gt;
+
+
+&lt;span class=&quot;token keyword&quot;&gt;let&lt;/span&gt; p1 &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;ES6Promise&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;resolve&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; reject&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token function&quot;&gt;resolve&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;let&lt;/span&gt; p2 &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;Promise&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;resolve&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; reject&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token function&quot;&gt;setTimeout&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;token function&quot;&gt;resolve&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;999&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1000&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+ES6Promise&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;resolve&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;then&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;value &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; value &lt;span class=&quot;token operator&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; reason &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; reason&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;then&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;value &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; ES6Promise&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;reject&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;p2&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; reason &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; reason&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;catch&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;value&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;value&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;                    &lt;span class=&quot;token comment&quot;&gt;// 999&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;h2&gt;创建 Promise&lt;/h2&gt;
+&lt;p&gt;回想 ES6 的 &lt;code&gt;Promise&lt;/code&gt;对象构造函数，它要求传入一个执行器，执行器有两个参数&lt;code&gt;resolve&lt;/code&gt;和&lt;code&gt;reject&lt;/code&gt;，两个参数都是函数类型，我们可以在执行器中调用这两个方法，将&lt;code&gt;Promise&lt;/code&gt;变为&lt;code&gt;resolved&lt;/code&gt;或&lt;code&gt;rejected&lt;/code&gt;。先实现这个一步，代码如下：&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-none&quot;&gt;&lt;code&gt;const State = {
+    pending: 0,
+    resolved: 1,
+    rejected: 2
+}
+
+class ES6Promise {
+    constructor(executor) {
+        this._state = State.pending;    // 保存状态，取值为 State 之一
+        this._value = undefined;        // 保存 resolve 或 reject 时所传入的值
+        this._callbacks = [];           // 保存状态监听函数，promise 状态变化时调用
+
+        if (typeof executor === &apos;function&apos;) {
+            let resolve = (value) =&gt; {
+                this._transition(State.resolved, value);
+            };
+
+            let reject = (value) =&gt; {
+                this._transition(State.rejected, value);
+            };
+            executor(resolve, reject);
+        }
+    }
+
+    // 状态转移
+    _transition(state, value) {        
+        if (this._state === State.pending) {    
+            this._state = state;               
+            this._value = value;
+            this._callbacks.forEach(callback =&gt; callback());
+        } 
+    }
+}&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;p&gt;使用：&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-javascript&quot;&gt;&lt;code&gt;&lt;span class=&quot;token keyword&quot;&gt;let&lt;/span&gt; promise1 &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;ES6Promise&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;resolve&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; reject&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token function&quot;&gt;resolve&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;p&gt;首先，在&lt;code&gt;MyPromise&lt;/code&gt;构造函数中声明了两个成员变量&lt;code&gt;status&lt;/code&gt;和&lt;code&gt;data&lt;/code&gt;，分别表示&lt;code&gt;MyPromise&lt;/code&gt;的状态和数据。根据&lt;code&gt;Promise&lt;/code&gt;规范，其状态只能有三种：&lt;code&gt;pending&lt;/code&gt;、&lt;code&gt;resolved&lt;/code&gt;和&lt;code&gt;rejected&lt;/code&gt;，初始状态是&lt;code&gt;pending&lt;/code&gt;，一旦变化为&lt;code&gt;resolved&lt;/code&gt;或&lt;code&gt;rejected&lt;/code&gt;状态后，其状态不再变化。所以，初始设置&lt;code&gt;status&lt;/code&gt;为&lt;code&gt;undefined&lt;/code&gt;，当调用&lt;code&gt;resolve()&lt;/code&gt;或&lt;code&gt;reject()&lt;/code&gt;时，内部先判断其状态，如果状态已经发生变化，则直接返回，这样保证其状态不会被修改。否则，将状态标记为&lt;code&gt;resolved&lt;/code&gt;或&lt;code&gt;rejected&lt;/code&gt;，同时保存数据。&lt;/p&gt;
+&lt;h2&gt;实现 then 方法&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;Promise&lt;/code&gt;对象可以链式调用&lt;code&gt;then()&lt;/code&gt;方法，这得益于&lt;code&gt;then()&lt;/code&gt;返回的也是&lt;code&gt;Promise&lt;/code&gt;对象（准确说是&lt;code&gt;thenable&lt;/code&gt;对象，即包含&lt;code&gt;then&lt;/code&gt;方法的对象），例如：&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-none&quot;&gt;&lt;code&gt;let promise1 = new ES6Promise((resolve, reject) =&gt; {
+    resolve(1);
+});
+
+let promise2 = promise1.then(function onResolved(){}, function onRejected() {});&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;p&gt;所以下面&lt;code&gt;ES6Promise&lt;/code&gt;的&lt;code&gt;then&lt;/code&gt;函数实现中，首先创建并返回一个新的&lt;code&gt;ES6Promise&lt;/code&gt;对象&lt;code&gt;promise2&lt;/code&gt;，在传入&lt;code&gt;promise2&lt;/code&gt;构造函数的执行器内部，通过&lt;code&gt;resolve&lt;/code&gt;和&lt;code&gt;reject&lt;/code&gt;方法修改&lt;code&gt;promise2&lt;/code&gt;的状态。&lt;code&gt;promise2&lt;/code&gt;状态何时变化，取决于当前&lt;code&gt;promise1&lt;/code&gt;的状态，如果&lt;code&gt;promise1&lt;/code&gt;状态是&lt;code&gt;pending&lt;/code&gt;，则等待&lt;code&gt;promise1&lt;/code&gt;被&lt;code&gt;resolved&lt;/code&gt;或&lt;code&gt;rejected&lt;/code&gt;时执行&lt;code&gt;scheduleFn()&lt;/code&gt;，否则立即执行&lt;code&gt;scheduleFn()&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;scheduleFn()&lt;/code&gt;方法主要工作是，根据&lt;code&gt;promise1&lt;/code&gt;当前状态是&lt;code&gt;resolved&lt;/code&gt;（或&lt;code&gt;rejected&lt;/code&gt;），调用&lt;code&gt;then(onResolved, onRejected)&lt;/code&gt;方法参数中的&lt;code&gt;onResolved(promise1.value)&lt;/code&gt;（或&lt;code&gt;onRejected(promise1.value)&lt;/code&gt;），以&lt;code&gt;promise1&lt;/code&gt;的内部值作为参数，返回结果传递给&lt;code&gt;promise2&lt;/code&gt;的&lt;code&gt;resolve&lt;/code&gt;（或&lt;code&gt;reject&lt;/code&gt;）方法，从而改变&lt;code&gt;promise2&lt;/code&gt;的状态和内部值。按 &lt;a href=&quot;https://promisesaplus.com/&quot;&gt;Promise/A+ 规范&lt;/a&gt; &lt;code&gt;scheduleFn()&lt;/code&gt;必须是异步执行的，所以这里通过&lt;code&gt;setTimeout()&lt;/code&gt;方法，让其在下个事件循环中处理。&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-javascript&quot;&gt;&lt;code&gt;&lt;span class=&quot;token keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;ES6Promise&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// 省略重复代码...&lt;/span&gt;
+
+    &lt;span class=&quot;token function&quot;&gt;then&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;onResolved&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; onRejected&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;token keyword&quot;&gt;let&lt;/span&gt; self &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+        &lt;span class=&quot;token keyword&quot;&gt;let&lt;/span&gt; promise2 &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;ES6Promise&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;resolve&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; reject&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;token keyword&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;token function-variable function&quot;&gt;scheduleFn&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;token function&quot;&gt;setTimeout&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    
+                    onResolved &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;typeof&lt;/span&gt; onResolved &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;function&apos;&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;?&lt;/span&gt; onResolved &lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; v &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; v&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+                    onRejected &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;typeof&lt;/span&gt; onRejected &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;function&apos;&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;?&lt;/span&gt; onRejected &lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; v &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;throw&lt;/span&gt; v&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+                    &lt;span class=&quot;token keyword&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+                        &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;self&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;_state &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; State&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;resolved&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+                            &lt;span class=&quot;token function&quot;&gt;resolve&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;onResolved&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;self&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;_value&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+                        &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+                            &lt;span class=&quot;token function&quot;&gt;resolve&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;onRejected&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;self&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;_value&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+                        &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;                    
+                    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token class-name&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+                        &lt;span class=&quot;token function&quot;&gt;reject&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;e&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+                    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+                &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+            &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;_state &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; State&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;pending&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;token keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;_callbacks&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;push&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;scheduleFn&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;token function&quot;&gt;scheduleFn&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+        &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; promise2&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;h2&gt;实现 then 方法 v2&lt;/h2&gt;
+&lt;p&gt;上面实现的&lt;code&gt;then()&lt;/code&gt;方法中， 直接将&lt;code&gt;onResolved()&lt;/code&gt;（或&lt;code&gt;onRejected()&lt;/code&gt;）的返回值，传递给&lt;code&gt;resolve&lt;/code&gt;（或&lt;code&gt;reject&lt;/code&gt;），改变&lt;code&gt;promise2&lt;/code&gt;的状态和内部值。这里有一个问题，如果&lt;code&gt;onResolved()&lt;/code&gt;（或&lt;code&gt;onRejected()&lt;/code&gt;）返回的也是一个&lt;code&gt;Promise&lt;/code&gt;对象（或&lt;code&gt;thenable&lt;/code&gt;对象），那么&lt;code&gt;promise2&lt;/code&gt;不会等到这个返回的&lt;code&gt;Promise&lt;/code&gt;对象&lt;code&gt;resolved&lt;/code&gt;或的&lt;code&gt;rejected&lt;/code&gt;后才执行，而是将返回的&lt;code&gt;Promise&lt;/code&gt;对象作为&lt;code&gt;promise2&lt;/code&gt;的内部值。看下面例子，最后一个&lt;code&gt;then()&lt;/code&gt;方法执行后应该输出&lt;code&gt;2&lt;/code&gt;才符合预期，而实际输出的是&lt;code&gt;ES6Promise&lt;/code&gt;对象实例：&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-javascript&quot;&gt;&lt;code&gt;&lt;span class=&quot;token keyword&quot;&gt;let&lt;/span&gt; p1 &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;ES6Promise&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;resolve&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; reject&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token function&quot;&gt;resolve&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;then&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;value &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;ES6Promise&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;resolve&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; reject&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;token function&quot;&gt;setTimeout&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;resolve&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;value &lt;span class=&quot;token operator&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1000&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;then&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;value &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;value&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;       &lt;span class=&quot;token comment&quot;&gt;// 输出：ES6Promise 对象&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;p&gt;为了解决上面这个问题，需要对&lt;code&gt;onResolved()&lt;/code&gt;（或&lt;code&gt;onRejected()&lt;/code&gt;）的返回值（暂称之为&lt;code&gt;x&lt;/code&gt;）进行判断和处理，这里引入一个&lt;code&gt;resolveProcedure()&lt;/code&gt;方法，该方法根据&lt;code&gt;x&lt;/code&gt;值的类型，决定何时调用&lt;code&gt;promise2&lt;/code&gt;的&lt;code&gt;resolve&lt;/code&gt;或&lt;code&gt;reject&lt;/code&gt;方法。如果&lt;code&gt;x&lt;/code&gt;是一个&lt;code&gt;thenable&lt;/code&gt;对象，则等到该&lt;code&gt;thenable&lt;/code&gt;对象状态确定时才调用调用&lt;code&gt;promise2&lt;/code&gt;的&lt;code&gt;resolve&lt;/code&gt;或&lt;code&gt;reject&lt;/code&gt;方法，否则立即调用&lt;code&gt;promise2&lt;/code&gt;的&lt;code&gt;resolve&lt;/code&gt;，如果中间抛出异常，则立即调用&lt;code&gt;promise2&lt;/code&gt;的&lt;code&gt;reject&lt;/code&gt;方法。代码如下：&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-javascript&quot;&gt;&lt;code&gt;&lt;span class=&quot;token keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;ES6Promise&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// 省略重复代码...&lt;/span&gt;
+
+    &lt;span class=&quot;token function&quot;&gt;then&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;onResolved&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; onRejected&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;token keyword&quot;&gt;let&lt;/span&gt; self &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+        &lt;span class=&quot;token keyword&quot;&gt;let&lt;/span&gt; promise2 &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;ES6Promise&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;resolve&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; reject&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;token keyword&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;token function-variable function&quot;&gt;scheduleFn&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;token function&quot;&gt;setTimeout&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+                    onResolved &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;typeof&lt;/span&gt; onResolved &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;function&apos;&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;?&lt;/span&gt; onResolved &lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; v &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; v&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+                    onRejected &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;typeof&lt;/span&gt; onRejected &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;function&apos;&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;?&lt;/span&gt; onRejected &lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; v &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;throw&lt;/span&gt; v&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+                    &lt;span class=&quot;token keyword&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+                        &lt;span class=&quot;token comment&quot;&gt;// 修改这里&lt;/span&gt;
+                        &lt;span class=&quot;token keyword&quot;&gt;let&lt;/span&gt; x &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; self&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;_state &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; State&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;resolved &lt;span class=&quot;token operator&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;onResolved&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;self&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;_value&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;onRejected&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;self&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;_value&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+                        &lt;span class=&quot;token function&quot;&gt;resolveProcedure&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; resolve&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; reject &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; x&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+                    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token class-name&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+                        &lt;span class=&quot;token function&quot;&gt;reject&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;e&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+                    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+                &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+            &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;_state &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; State&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;pending&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;token keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;_callbacks&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;push&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;scheduleFn&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;token function&quot;&gt;scheduleFn&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+        &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; promise2&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+
+&lt;span class=&quot;token comment&quot;&gt;// 根据 x 值，解析 promise 状态&lt;/span&gt;
+ &lt;span class=&quot;token function&quot;&gt;resolveProcedure&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;promise&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; x&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;resolveProcedure&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; resolve&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; reject&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; promise2 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; x&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// 2.3.1 If promise and x refer to the same object, reject promise with a TypeError as the reason.&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;promise2 &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; x&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;token function&quot;&gt;reject&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;TypeError&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;x &lt;span class=&quot;token keyword&quot;&gt;instanceof&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;ES6Promise&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;    &lt;span class=&quot;token comment&quot;&gt;// 2.3.2 If x is a promise, adopt its state&lt;/span&gt;
+        x&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;then&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;value &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;resolveProcedure&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;resolve&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; reject&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; promise2&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; value&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; reason &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;reject&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;reason&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;typeof&lt;/span&gt; x &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;object&apos;&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; x &lt;span class=&quot;token operator&quot;&gt;!==&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;typeof&lt;/span&gt; x &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;function&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;  &lt;span class=&quot;token comment&quot;&gt;// 2.3.3 &lt;/span&gt;
+        &lt;span class=&quot;token keyword&quot;&gt;let&lt;/span&gt; resolvedOrRejected &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;token keyword&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;token keyword&quot;&gt;let&lt;/span&gt; then &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; x&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;then&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;      &lt;span class=&quot;token comment&quot;&gt;// 2.3.3.1 Let then be x.then&lt;/span&gt;
+            &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;typeof&lt;/span&gt; then &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;function&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;   &lt;span class=&quot;token comment&quot;&gt;// 2.3.3 If then is a function, call it with x as this, first argument resolvePromise, and second argument rejectPromise, where:&lt;/span&gt;
+                then&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;call&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; value &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+                    &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;!&lt;/span&gt;resolvedOrRejected&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+                        &lt;span class=&quot;token function&quot;&gt;resolveProcedure&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; resolve&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; reject&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; promise2 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; value&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// 2.3.3.3.1 If/when resolvePromise is called with a value y, run [[Resolve]](promise, y).&lt;/span&gt;
+                        resolvedOrRejected &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+                    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+                    &lt;span class=&quot;token comment&quot;&gt;// 2.3.3.3.3 If both resolvePromise and rejectPromise are called, or multiple calls to the same argument are made, the first call takes precedence, and any further calls are ignored.&lt;/span&gt;
+                &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; reason &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+                    &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;!&lt;/span&gt;resolvedOrRejected&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+                        &lt;span class=&quot;token function&quot;&gt;reject&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;reason&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;             &lt;span class=&quot;token comment&quot;&gt;// 2.3.3.3.2 If/when rejectPromise is called with a reason r, reject promise with r.&lt;/span&gt;
+                        resolvedOrRejected &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+                    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+                    &lt;span class=&quot;token comment&quot;&gt;// 2.3.3.3.3 If both resolvePromise and rejectPromise are called, or multiple calls to the same argument are made, the first call takes precedence, and any further calls are ignored.&lt;/span&gt;
+                &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;                &lt;span class=&quot;token comment&quot;&gt;// 2.3.3.4 If then is not a function, fulfill promise with x.&lt;/span&gt;
+                &lt;span class=&quot;token function&quot;&gt;resolve&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token class-name&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;!&lt;/span&gt;resolvedOrRejected&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;token comment&quot;&gt;// 2.3.3.2 If retrieving the property x.then results in a thrown exception e, reject promise with e as the reason.&lt;/span&gt;
+                &lt;span class=&quot;token comment&quot;&gt;// 2.3.3.4 If calling then throws an exception e&lt;/span&gt;
+                &lt;span class=&quot;token function&quot;&gt;reject&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;e&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;token function&quot;&gt;resolve&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;     &lt;span class=&quot;token comment&quot;&gt;// 2.3.4 If x is not an object or function, fulfill promise with x.&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;p&gt;修改后，再次运行上面测试代码，结果符合预期：&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-javascript&quot;&gt;&lt;code&gt;&lt;span class=&quot;token keyword&quot;&gt;let&lt;/span&gt; p1 &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;ES6Promise&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;resolve&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; reject&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token function&quot;&gt;resolve&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;then&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;value &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;ES6Promise&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;resolve&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; reject&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;token function&quot;&gt;setTimeout&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;resolve&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;value &lt;span class=&quot;token operator&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1000&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;then&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;value &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;value&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;       &lt;span class=&quot;token comment&quot;&gt;// 输出： 2&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;h2&gt;实现 catch 方法&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;ES6Promise&lt;/code&gt;核心的&lt;code&gt;then&lt;/code&gt;方法上面已经实现，&lt;code&gt;catch&lt;/code&gt;方法不过是&lt;code&gt;then&lt;/code&gt;方法的一种便捷形式，其实现如下：&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-javascript&quot;&gt;&lt;code&gt;&lt;span class=&quot;token keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;ES6Promise&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// 省略重复代码...&lt;/span&gt;
+
+    &lt;span class=&quot;token keyword&quot;&gt;catch&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;onRejected&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;token keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;then&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;undefined&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; onRejected&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;h2&gt;实现 resolve/reject 静态&lt;/h2&gt;
+&lt;p&gt;ES6 的&lt;code&gt;Promise&lt;/code&gt;对象还提供了两个静态方法&lt;code&gt;Promise.resolve&lt;/code&gt;和&lt;code&gt;Promise.reject&lt;/code&gt;，通过这两个方法可以很方便的将一般&lt;code&gt;javascript&lt;/code&gt;值封装成&lt;code&gt;Promise&lt;/code&gt;对象。实现这两个方法也很简单，以&lt;code&gt;Promise.resolve&lt;/code&gt;为例，首先这个方法要返回一个新的&lt;code&gt;Promise&lt;/code&gt;对象，新的&lt;code&gt;Promise&lt;/code&gt;对象解析传入的值，这个解析过程交由&lt;code&gt;resolveProcedure()&lt;/code&gt;方法完成，由于这是&lt;code&gt;resolve&lt;/code&gt;方法，所以即使&lt;code&gt;value&lt;/code&gt;是一个被&lt;code&gt;rejected&lt;/code&gt;的&lt;code&gt;Promise&lt;/code&gt;，也要将其结果&lt;code&gt;resolve&lt;/code&gt;，所以传递给&lt;code&gt;resolveProcedure()&lt;/code&gt;方法的第一个参数都是&lt;code&gt;resolve&lt;/code&gt;方法。&lt;code&gt;Promise.reject&lt;/code&gt;方法实现类似，代码如下：&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-javascript&quot;&gt;&lt;code&gt;&lt;span class=&quot;token keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;ES6Promise&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// 省略重复代码...&lt;/span&gt;
+
+    &lt;span class=&quot;token keyword&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;resolve&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;value&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;ES6Promise&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;resolve&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; reject&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;resolveProcedure&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;resolve&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; reject&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; resolve&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; value&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;token keyword&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;reject&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;reason&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;ES6Promise&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;resolve&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; reject&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;resolveProcedure&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;resolve&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; reject&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; reject&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; reason&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;h2&gt;测试&lt;/h2&gt;
+&lt;p&gt;上面的&lt;code&gt;ES6Promsie&lt;/code&gt;通过了 &lt;a href=&quot;https://github.com/promises-aplus/promises-tests&quot;&gt;promises-tests&lt;/a&gt; 提供的全部测试用例，意味着其完全符合了 Promise/A+ 规范。&lt;/p&gt;
+&lt;p&gt;可以通过 npm 安装后，查看源码和测试结果：&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-none&quot;&gt;&lt;code&gt;// 安装
+$ npm install es6-promise
+// 编译
+$ npm run build
+// 运行测试用例
+$ npm run test&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;h2&gt;小结&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;Promise&lt;/code&gt;作为社区产物，最终被纳入 ECMAScript 规范，可见其是被大众所接收的。&lt;code&gt;Promise&lt;/code&gt;改变了长久以来通过&lt;code&gt;callback&lt;/code&gt;编写异步代码的方式，让异步回调以一种更优雅的方式链式调用，并拥有更清晰的错误处理。&lt;code&gt;Promise&lt;/code&gt;同时也为&lt;code&gt;generator/yield&lt;/code&gt;和&lt;code&gt;async/await&lt;/code&gt;以同步方式编写异步代码提供了基础设施。&lt;code&gt;Promise&lt;/code&gt;使用起来很简单，但是涉及到一些复杂或极端的例子，需要对&lt;code&gt;Promise&lt;/code&gt;规范理解透彻才能正确得到结果。&lt;/p&gt;
+&lt;p&gt;附上一张根据自己理解画的&lt;code&gt;Promise&lt;/code&gt;处理示意图：&lt;/p&gt;
+&lt;p&gt;最后附上项目地址和仓库地址：&lt;/p&gt;
+&lt;p&gt;github 地址 : &lt;a href=&quot;https://github.com/whinc/es6-promise&quot;&gt;https://github.com/whinc/es6-promise&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;npm 地址：&lt;a href=&quot;https://www.npmjs.com/package/whinc-es6-promise&quot;&gt;https://www.npmjs.com/package/whinc-es6-promise&lt;/a&gt;&lt;/p&gt;
+&lt;h2&gt;参考&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;https://promisesaplus.com/&quot;&gt;Promise/A+ 规范&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise&quot;&gt;Promise | MDN&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;崔鹏飞，&lt;a href=&quot;http://cuipengfei.me/blog/2016/05/15/promise/&quot;&gt;自己动手实现Promises/A+规范&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/promises-aplus/promises-tests&quot;&gt;promises-tests | github&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;阮一峰，&lt;a href=&quot;http://es6.ruanyifeng.com/#docs/promise&quot;&gt;ECMAScript 6 入门 - Promise&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;</content:encoded></item></channel></rss>

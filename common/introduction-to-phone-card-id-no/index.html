@@ -1,0 +1,583 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"/><meta http-equiv="x-ua-compatible" content="ie=edge"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="preload" href="/blog/component---src-layouts-index-js-58b31e5739a45f38ba88.js" as="script"/><link rel="preload" href="/blog/component---src-templates-blog-post-js-443b4e797689934d1548.js" as="script"/><link rel="preload" href="/blog/path---common-introduction-to-phone-card-id-no-28801bbdbe28e5240047.js" as="script"/><link rel="preload" href="/blog/app-a2eb0ba157d6fa4e8841.js" as="script"/><link rel="preload" href="/blog/commons-3cf304937523a964e309.js" as="script"/><link rel="alternate" type="application/rss+xml" href="/rss.xml"/><title data-react-helmet="true">银行卡号/身份证号/手机号的组成及校验 | Whinc Blog</title><style id="typography.js">html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}article,aside,details,figcaption,figure,footer,header,main,menu,nav,section,summary{display:block}audio,canvas,progress,video{display:inline-block}audio:not([controls]){display:none;height:0}progress{vertical-align:baseline}[hidden],template{display:none}a{background-color:transparent;-webkit-text-decoration-skip:objects}a:active,a:hover{outline-width:0}abbr[title]{border-bottom:none;text-decoration:underline;text-decoration:underline dotted}b,strong{font-weight:inherit;font-weight:bolder}dfn{font-style:italic}h1{font-size:2em;margin:.67em 0}mark{background-color:#ff0;color:#000}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}img{border-style:none}svg:not(:root){overflow:hidden}code,kbd,pre,samp{font-family:monospace,monospace;font-size:1em}figure{margin:1em 40px}hr{box-sizing:content-box;height:0;overflow:visible}button,input,optgroup,select,textarea{font:inherit;margin:0}optgroup{font-weight:700}button,input{overflow:visible}button,select{text-transform:none}[type=reset],[type=submit],button,html [type=button]{-webkit-appearance:button}[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner,button::-moz-focus-inner{border-style:none;padding:0}[type=button]:-moz-focusring,[type=reset]:-moz-focusring,[type=submit]:-moz-focusring,button:-moz-focusring{outline:1px dotted ButtonText}fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em}legend{box-sizing:border-box;color:inherit;display:table;max-width:100%;padding:0;white-space:normal}textarea{overflow:auto}[type=checkbox],[type=radio]{box-sizing:border-box;padding:0}[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}[type=search]::-webkit-search-cancel-button,[type=search]::-webkit-search-decoration{-webkit-appearance:none}::-webkit-input-placeholder{color:inherit;opacity:.54}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}html{font:100%/1.75em 'Merriweather','Georgia',serif;box-sizing:border-box;overflow-y:scroll;}*{box-sizing:inherit;}*:before{box-sizing:inherit;}*:after{box-sizing:inherit;}body{color:hsla(0,0%,0%,0.9);font-family:'Merriweather','Georgia',serif;font-weight:400;word-wrap:break-word;font-kerning:normal;-moz-font-feature-settings:"kern", "liga", "clig", "calt";-ms-font-feature-settings:"kern", "liga", "clig", "calt";-webkit-font-feature-settings:"kern", "liga", "clig", "calt";font-feature-settings:"kern", "liga", "clig", "calt";}img{max-width:100%;margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;}h1{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;color:inherit;font-family:Montserrat,sans-serif;font-weight:900;text-rendering:optimizeLegibility;font-size:2.5rem;line-height:1.1;}h2{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;color:inherit;font-family:'Merriweather','Georgia',serif;font-weight:900;text-rendering:optimizeLegibility;font-size:1.73286rem;line-height:1.1;}h3{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;color:inherit;font-family:'Merriweather','Georgia',serif;font-weight:900;text-rendering:optimizeLegibility;font-size:1.4427rem;line-height:1.1;}h4{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;color:inherit;font-family:'Merriweather','Georgia',serif;font-weight:900;text-rendering:optimizeLegibility;font-size:1rem;line-height:1.1;letter-spacing:0.140625em;text-transform:uppercase;}h5{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;color:inherit;font-family:'Merriweather','Georgia',serif;font-weight:900;text-rendering:optimizeLegibility;font-size:0.83255rem;line-height:1.1;}h6{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;color:inherit;font-family:'Merriweather','Georgia',serif;font-weight:900;text-rendering:optimizeLegibility;font-size:0.75966rem;line-height:1.1;font-style:italic;}hgroup{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;}ul{margin-left:1.75rem;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;list-style-position:outside;list-style-image:none;list-style:disc;}ol{margin-left:1.75rem;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;list-style-position:outside;list-style-image:none;}dl{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;}dd{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;}p{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;}figure{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;}pre{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;font-size:0.85rem;line-height:1.75rem;}table{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;font-size:1rem;line-height:1.75rem;border-collapse:collapse;width:100%;}fieldset{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;}blockquote{margin-left:-1.75rem;margin-right:1.75rem;margin-top:0;padding-bottom:0;padding-left:1.42188rem;padding-right:0;padding-top:0;margin-bottom:1.75rem;font-size:1.20112rem;line-height:1.75rem;color:hsla(0,0%,0%,0.59);font-style:italic;border-left:0.32813rem solid hsla(0,0%,0%,0.9);}form{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;}noscript{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;}iframe{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;}hr{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:calc(1.75rem - 1px);background:hsla(0,0%,0%,0.2);border:none;height:1px;}address{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;}b{font-weight:700;}strong{font-weight:700;}dt{font-weight:700;}th{font-weight:700;}li{margin-bottom:calc(1.75rem / 2);}ol li{padding-left:0;}ul li{padding-left:0;}li > ol{margin-left:1.75rem;margin-bottom:calc(1.75rem / 2);margin-top:calc(1.75rem / 2);}li > ul{margin-left:1.75rem;margin-bottom:calc(1.75rem / 2);margin-top:calc(1.75rem / 2);}blockquote *:last-child{margin-bottom:0;}li *:last-child{margin-bottom:0;}p *:last-child{margin-bottom:0;}li > p{margin-bottom:calc(1.75rem / 2);}code{font-size:0.85rem;line-height:1.75rem;}kbd{font-size:0.85rem;line-height:1.75rem;}samp{font-size:0.85rem;line-height:1.75rem;}abbr{border-bottom:1px dotted hsla(0,0%,0%,0.5);cursor:help;}acronym{border-bottom:1px dotted hsla(0,0%,0%,0.5);cursor:help;}abbr[title]{border-bottom:1px dotted hsla(0,0%,0%,0.5);cursor:help;text-decoration:none;}thead{text-align:left;}td,th{text-align:left;border-bottom:1px solid hsla(0,0%,0%,0.12);font-feature-settings:"tnum";-moz-font-feature-settings:"tnum";-ms-font-feature-settings:"tnum";-webkit-font-feature-settings:"tnum";padding-left:1.16667rem;padding-right:1.16667rem;padding-top:0.875rem;padding-bottom:calc(0.875rem - 1px);}th:first-child,td:first-child{padding-left:0;}th:last-child,td:last-child{padding-right:0;}blockquote > :last-child{margin-bottom:0;}blockquote cite{font-size:1rem;line-height:1.75rem;color:hsla(0,0%,0%,0.9);font-weight:400;}blockquote cite:before{content:"— ";}ul,ol{margin-left:0;}@media only screen and (max-width:480px){ul,ol{margin-left:1.75rem;}blockquote{margin-left:-1.3125rem;margin-right:0;padding-left:0.98438rem;}}h1,h2,h3,h4,h5,h6{margin-top:3.5rem;}a{box-shadow:0 1px 0 0 currentColor;color:#007acc;text-decoration:none;}a:hover,a:active{box-shadow:none;}mark,ins{background:#007acc;color:white;padding:0.10938rem 0.21875rem;text-decoration:none;}a.gatsby-resp-image-link{box-shadow:none;}</style><link href="//fonts.googleapis.com/css?family=Montserrat:700|Merriweather:400,400i,700,700i,900,900i" rel="stylesheet" type="text/css"/><style id="gatsby-inlined-css">@font-face{font-family:Montserrat;font-style:normal;font-display:swap;font-weight:100;src:local("Montserrat Thin "),local("Montserrat-Thin"),url(/blog/static/montserrat-latin-100.50d27986.woff2) format("woff2"),url(/blog/static/montserrat-latin-100.5e334eff.woff) format("woff")}@font-face{font-family:Montserrat;font-style:italic;font-display:swap;font-weight:100;src:local("Montserrat Thin italic"),local("Montserrat-Thinitalic"),url(/blog/static/montserrat-latin-100italic.8c070533.woff2) format("woff2"),url(/blog/static/montserrat-latin-100italic.03e19243.woff) format("woff")}@font-face{font-family:Montserrat;font-style:normal;font-display:swap;font-weight:200;src:local("Montserrat Extra Light "),local("Montserrat-Extra Light"),url(/blog/static/montserrat-latin-200.4343d3d9.woff2) format("woff2"),url(/blog/static/montserrat-latin-200.f2022ecd.woff) format("woff")}@font-face{font-family:Montserrat;font-style:italic;font-display:swap;font-weight:200;src:local("Montserrat Extra Light italic"),local("Montserrat-Extra Lightitalic"),url(/blog/static/montserrat-latin-200italic.116c4c4b.woff2) format("woff2"),url(/blog/static/montserrat-latin-200italic.89614a60.woff) format("woff")}@font-face{font-family:Montserrat;font-style:normal;font-display:swap;font-weight:300;src:local("Montserrat Light "),local("Montserrat-Light"),url(/blog/static/montserrat-latin-300.d2ad295b.woff2) format("woff2"),url(/blog/static/montserrat-latin-300.3a371ee0.woff) format("woff")}@font-face{font-family:Montserrat;font-style:italic;font-display:swap;font-weight:300;src:local("Montserrat Light italic"),local("Montserrat-Lightitalic"),url(/blog/static/montserrat-latin-300italic.f6b6bf24.woff2) format("woff2"),url(/blog/static/montserrat-latin-300italic.16521668.woff) format("woff")}@font-face{font-family:Montserrat;font-style:normal;font-display:swap;font-weight:400;src:local("Montserrat Regular "),local("Montserrat-Regular"),url(/blog/static/montserrat-latin-400.240a8444.woff2) format("woff2"),url(/blog/static/montserrat-latin-400.b20cc131.woff) format("woff")}@font-face{font-family:Montserrat;font-style:italic;font-display:swap;font-weight:400;src:local("Montserrat Regular italic"),local("Montserrat-Regularitalic"),url(/blog/static/montserrat-latin-400italic.86172bb8.woff2) format("woff2"),url(/blog/static/montserrat-latin-400italic.9405e787.woff) format("woff")}@font-face{font-family:Montserrat;font-style:normal;font-display:swap;font-weight:500;src:local("Montserrat Medium "),local("Montserrat-Medium"),url(/blog/static/montserrat-latin-500.fb8d6b71.woff2) format("woff2"),url(/blog/static/montserrat-latin-500.50825d47.woff) format("woff")}@font-face{font-family:Montserrat;font-style:italic;font-display:swap;font-weight:500;src:local("Montserrat Medium italic"),local("Montserrat-Mediumitalic"),url(/blog/static/montserrat-latin-500italic.c0a555a4.woff2) format("woff2"),url(/blog/static/montserrat-latin-500italic.635de59c.woff) format("woff")}@font-face{font-family:Montserrat;font-style:normal;font-display:swap;font-weight:600;src:local("Montserrat SemiBold "),local("Montserrat-SemiBold"),url(/blog/static/montserrat-latin-600.d5615136.woff2) format("woff2"),url(/blog/static/montserrat-latin-600.f300da4f.woff) format("woff")}@font-face{font-family:Montserrat;font-style:italic;font-display:swap;font-weight:600;src:local("Montserrat SemiBold italic"),local("Montserrat-SemiBolditalic"),url(/blog/static/montserrat-latin-600italic.10f29d13.woff2) format("woff2"),url(/blog/static/montserrat-latin-600italic.2bc37d86.woff) format("woff")}@font-face{font-family:Montserrat;font-style:normal;font-display:swap;font-weight:700;src:local("Montserrat Bold "),local("Montserrat-Bold"),url(/blog/static/montserrat-latin-700.7d77e1f0.woff2) format("woff2"),url(/blog/static/montserrat-latin-700.81826529.woff) format("woff")}@font-face{font-family:Montserrat;font-style:italic;font-display:swap;font-weight:700;src:local("Montserrat Bold italic"),local("Montserrat-Bolditalic"),url(/blog/static/montserrat-latin-700italic.1dd2b53f.woff2) format("woff2"),url(/blog/static/montserrat-latin-700italic.c162d257.woff) format("woff")}@font-face{font-family:Montserrat;font-style:normal;font-display:swap;font-weight:800;src:local("Montserrat ExtraBold "),local("Montserrat-ExtraBold"),url(/blog/static/montserrat-latin-800.d4e7bf86.woff2) format("woff2"),url(/blog/static/montserrat-latin-800.895aadbf.woff) format("woff")}@font-face{font-family:Montserrat;font-style:italic;font-display:swap;font-weight:800;src:local("Montserrat ExtraBold italic"),local("Montserrat-ExtraBolditalic"),url(/blog/static/montserrat-latin-800italic.fc0cbe44.woff2) format("woff2"),url(/blog/static/montserrat-latin-800italic.b3362875.woff) format("woff")}@font-face{font-family:Montserrat;font-style:normal;font-display:swap;font-weight:900;src:local("Montserrat Black "),local("Montserrat-Black"),url(/blog/static/montserrat-latin-900.c8bdd772.woff2) format("woff2"),url(/blog/static/montserrat-latin-900.1b99ef78.woff) format("woff")}@font-face{font-family:Montserrat;font-style:italic;font-display:swap;font-weight:900;src:local("Montserrat Black italic"),local("Montserrat-Blackitalic"),url(/blog/static/montserrat-latin-900italic.cb72c1f9.woff2) format("woff2"),url(/blog/static/montserrat-latin-900italic.b78bb9f8.woff) format("woff")}@font-face{font-family:Merriweather;font-style:normal;font-display:swap;font-weight:300;src:local("Merriweather Light "),local("Merriweather-Light"),url(/blog/static/merriweather-latin-300.f015f1e9.woff2) format("woff2"),url(/blog/static/merriweather-latin-300.92dfe81b.woff) format("woff")}@font-face{font-family:Merriweather;font-style:italic;font-display:swap;font-weight:300;src:local("Merriweather Light italic"),local("Merriweather-Lightitalic"),url(/blog/static/merriweather-latin-300italic.7fd86b32.woff2) format("woff2"),url(/blog/static/merriweather-latin-300italic.878b76f5.woff) format("woff")}@font-face{font-family:Merriweather;font-style:normal;font-display:swap;font-weight:400;src:local("Merriweather Regular "),local("Merriweather-Regular"),url(/blog/static/merriweather-latin-400.12dbf4c0.woff2) format("woff2"),url(/blog/static/merriweather-latin-400.1fffad22.woff) format("woff")}@font-face{font-family:Merriweather;font-style:italic;font-display:swap;font-weight:400;src:local("Merriweather Regular italic"),local("Merriweather-Regularitalic"),url(/blog/static/merriweather-latin-400italic.1e0d3e81.woff2) format("woff2"),url(/blog/static/merriweather-latin-400italic.de18d4c4.woff) format("woff")}@font-face{font-family:Merriweather;font-style:normal;font-display:swap;font-weight:700;src:local("Merriweather Bold "),local("Merriweather-Bold"),url(/blog/static/merriweather-latin-700.dc8fec81.woff2) format("woff2"),url(/blog/static/merriweather-latin-700.d7d2ed8e.woff) format("woff")}@font-face{font-family:Merriweather;font-style:italic;font-display:swap;font-weight:700;src:local("Merriweather Bold italic"),local("Merriweather-Bolditalic"),url(/blog/static/merriweather-latin-700italic.b7b7e5da.woff2) format("woff2"),url(/blog/static/merriweather-latin-700italic.6210a5fc.woff) format("woff")}@font-face{font-family:Merriweather;font-style:normal;font-display:swap;font-weight:900;src:local("Merriweather Black "),local("Merriweather-Black"),url(/blog/static/merriweather-latin-900.43f870d5.woff2) format("woff2"),url(/blog/static/merriweather-latin-900.8f3806df.woff) format("woff")}@font-face{font-family:Merriweather;font-style:italic;font-display:swap;font-weight:900;src:local("Merriweather Black italic"),local("Merriweather-Blackitalic"),url(/blog/static/merriweather-latin-900italic.168c1ab2.woff2) format("woff2"),url(/blog/static/merriweather-latin-900italic.ae7778f0.woff) format("woff")}</style></head><body><div id="___gatsby"><div style="max-width:42rem;margin-left:auto;margin-right:auto;padding:2.625rem 1.3125rem;" data-reactroot="" data-reactid="1" data-react-checksum="-1025352881"><h3 style="font-family:Montserrat, sans-serif;margin-top:0;margin-bottom:-1.75rem;" data-reactid="2"><a style="box-shadow:none;text-decoration:none;color:inherit;" href="/blog/" data-reactid="3">Gatsby Starter Blog</a></h3><div data-reactid="4"><!-- react-empty: 5 --><h1 data-reactid="6">银行卡号/身份证号/手机号的组成及校验</h1><p style="font-size:0.83255rem;line-height:1.75rem;display:block;margin-bottom:1.75rem;margin-top:-1.75rem;" data-reactid="7"></p><div data-reactid="8"><blockquote>
+<p>本文总结了常见的银行卡号、身份证号和手机号的组成及校验方法，并提供了完整的示例代码。</p>
+</blockquote>
+<h2>1. 银行卡号（Bank Card Number）</h2>
+<p>平时生活中钱包里面充满了各种各样的卡，如信用卡、借记卡、礼品卡、会员卡和VIP卡等等，这些卡号并非随意定制的，都遵循国际标准 <a href="https://en.wikipedia.org/wiki/ISO/IEC_7812">ISO/IEC 7812</a>，开发过程中接触到较多的是银行卡号，下面主要说下银行卡号的组成和校验。银行卡一般长下面这样：</p>
+<p>
+  <a
+    class="gatsby-resp-image-link"
+    href="/static/bank-card-example-1726aa1bd4abe9cab25b98c1586433f7-ea699.jpg"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+  
+  <span
+    class="gatsby-resp-image-wrapper"
+    style="position: relative; display: block; ; max-width: 234px; margin-left: auto; margin-right: auto;"
+  >
+    <span
+      class="gatsby-resp-image-background-image"
+      style="padding-bottom: 62.82051282051282%; position: relative; bottom: 0; left: 0; background-image: url('data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAANABQDASIAAhEBAxEB/8QAGAAAAgMAAAAAAAAAAAAAAAAAAAQBAwX/xAAVAQEBAAAAAAAAAAAAAAAAAAAAAf/aAAwDAQACEAMQAAABz63ZhkZK/8QAHRAAAgIBBQAAAAAAAAAAAAAAAQIAAxIEERMUIv/aAAgBAQABBQIsccnmlJ4+vFo2aivz/8QAFBEBAAAAAAAAAAAAAAAAAAAAEP/aAAgBAwEBPwE//8QAFBEBAAAAAAAAAAAAAAAAAAAAEP/aAAgBAgEBPwE//8QAHhAAAgAGAwAAAAAAAAAAAAAAAAEREiExMkFRgaH/2gAIAQEABj8CTmubHV3MvCM0eh13wf/EABsQAQADAAMBAAAAAAAAAAAAAAEAEUEhMWGB/9oACAEBAAE/Iaos4LsgD39rH3We/CFJKSqMjGc4j//aAAwDAQACAAMAAAAQTM//xAAUEQEAAAAAAAAAAAAAAAAAAAAQ/9oACAEDAQE/ED//xAAUEQEAAAAAAAAAAAAAAAAAAAAQ/9oACAECAQE/ED//xAAdEAEBAAIBBQAAAAAAAAAAAAABEQAhMUGhwfDx/9oACAEBAAE/EKd0VsHKIaejnNc4iK1goOadfrABIt6vfJNKrITQeM//2Q=='); background-size: cover; display: block;"
+    >
+      <img
+        class="gatsby-resp-image-image"
+        style="width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px white;"
+        alt="bank card example"
+        title=""
+        src="/static/bank-card-example-1726aa1bd4abe9cab25b98c1586433f7-ea699.jpg"
+        srcset="/static/bank-card-example-1726aa1bd4abe9cab25b98c1586433f7-a5a9b.jpg 148w,
+/static/bank-card-example-1726aa1bd4abe9cab25b98c1586433f7-ea699.jpg 234w"
+        sizes="(max-width: 234px) 100vw, 234px"
+      />
+    </span>
+  </span>
+  
+  </a>
+    </p>
+<blockquote>
+<p>银行卡号：<strong>6225768888888888</strong></p>
+</blockquote>
+<h3>1.1 卡号组成</h3>
+<p>银行卡号一般是 16 位（信用卡/借记卡）或 19 位（借记卡）</p>
+<div class="gatsby-highlight">
+      <pre class="language-none"><code>  /--MII      
+_/     /--IIN(BIN)
+      /     /--个人账户标识，长度 6-12 位
+_____/ ____/ _/--校验位
+622576 8...8 8</code></pre>
+      </div>
+<p><strong>第 1 位</strong></p>
+<p>卡号首位表示主要产业标识符(<a href="https://en.wikipedia.org/wiki/ISO/IEC_7812">Major Industry Identifie, MII</a>)，由国际标准化组织于1989年首次发布，通过该值可以区分卡号的发行者所属行业，所有取值见下表：</p>
+<table>
+<thead>
+<tr>
+<th>卡号首位</th>
+<th>发行者类别</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td><a href="https://en.wikipedia.org/wiki/ISO/TC_68">ISO/TC 68</a>
+及其他行业</td>
+</tr>
+<tr>
+<td>1</td>
+<td>航空</td>
+</tr>
+<tr>
+<td>2</td>
+<td>航空、金融和其他未来行业</td>
+</tr>
+<tr>
+<td>3</td>
+<td>旅游和娱乐业</td>
+</tr>
+<tr>
+<td>4</td>
+<td>银行业和金融业</td>
+</tr>
+<tr>
+<td>5</td>
+<td>银行业和金融业</td>
+</tr>
+<tr>
+<td>6</td>
+<td>商业和银行金融业</td>
+</tr>
+<tr>
+<td>7</td>
+<td>使用和其他未来行业</td>
+</tr>
+<tr>
+<td>8</td>
+<td>医疗、电信和其他未来行业</td>
+</tr>
+<tr>
+<td>9</td>
+<td>国家标准机构</td>
+</tr>
+</tbody>
+</table>
+<p><strong>第 1-6 位</strong></p>
+<p>卡号前 6 位表示发行者标识代码(<a href="https://en.wikipedia.org/wiki/Payment_card_number#Issuer_identification_number_.28IIN.29">Issuer Identification Number, IIN</a>)，也称位发卡行识别码(Bank Identification Number, BIN)，包含第 1 位产业标识符 MII，通过 IIN 可以区分卡号的发行机构。</p>
+<table>
+<thead>
+<tr>
+<th>发布网</th>
+<th>IIN 范围</th>
+<th>长度</th>
+<th>校验算法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>中国银联(China UnionPay)</td>
+<td>62</td>
+<td>16-19</td>
+<td>Luhn algorithm</td>
+</tr>
+<tr>
+<td>美国运通(American Express)</td>
+<td>34,37</td>
+<td>15</td>
+<td>Luhn algorithm</td>
+</tr>
+<tr>
+<td>Visa</td>
+<td>4</td>
+<td>13,16,19</td>
+<td>Luhn algorithm</td>
+</tr>
+<tr>
+<td><a href="https://en.wikipedia.org/wiki/Payment_card_number#Issuer_identification_number_.28IIN.29">more…</a></td>
+<td>.</td>
+<td>.</td>
+<td>.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>第 7-X 位(长度可变，6-12位)</strong>
+除去卡号前 6 位和最后 1 位，中间数字表示个人账号标识，中间数字由发行机构自定义，由6-12位数字组成。每个银行的个人账号标识规则有所不同。有的银行在这部分内容中会包含分行、支行、储蓄网点等代码信息。有得银行可能就没有这么详细，会使用自然流水顺序码。</p>
+<p><strong>最后 1 位</strong></p>
+<p>最后 1 位表示校验位，由卡号前面的数字(不含最后 1 位)采用<a href="https://en.wikipedia.org/wiki/Luhn_algorithm">Luhn算法</a>计算得出。</p>
+<h3>1.2 卡号校验</h3>
+<p>卡号的最后一位都是通过<a href="https://en.wikipedia.org/wiki/Luhn_algorithm">Luhn算法</a>进行计算或校验。luhn 算法也称为“mod 10”算法(源于算法最后一步操作是模10)，它是一个简单的 checksum 算法。使用 luhn 算法校验的数字串，最后一位是校验位，使用 luhn 算法可校验数字串是否有效。</p>
+<p>其具体算法步骤如下：</p>
+<ol>
+<li>从待校验的数字串的最右侧（校验位）开始，向左遍历，奇数位数字累加，偶数位数字进行下面处理后的结果累加
+1.1 偶数位数字乘以 2 后，如果结果大于 9，则将结果的个位和十位相加后返回（16: 1+6=7），否则返回结果</li>
+<li>上一步累加的结果模 10 后，如果结果为 0，则数字串是有效的，否则是无效的</li>
+</ol>
+<p>假设数字串为<code>7992739871x</code>（<code>x</code>是校验位），下面是算法第 1 步的计算过程示例：</p>
+<table>
+<thead>
+<tr>
+<th>数字串</th>
+<th>7</th>
+<th>9</th>
+<th>9</th>
+<th>2</th>
+<th>7</th>
+<th>3</th>
+<th>9</th>
+<th>8</th>
+<th>7</th>
+<th>1</th>
+<th>x</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>乘以2</td>
+<td>7</td>
+<td><strong>18</strong></td>
+<td>9</td>
+<td><strong>4</strong></td>
+<td>7</td>
+<td><strong>6</strong></td>
+<td>9</td>
+<td><strong>16</strong></td>
+<td>7</td>
+<td><strong>2</strong></td>
+<td>x</td>
+</tr>
+<tr>
+<td>处理</td>
+<td>7</td>
+<td>9</td>
+<td>9</td>
+<td>4</td>
+<td>7</td>
+<td>6</td>
+<td>9</td>
+<td>7</td>
+<td>7</td>
+<td>2</td>
+<td>x</td>
+</tr>
+</tbody>
+</table>
+<p>luhn 校验算法的 JavaScript 实现如下：</p>
+<div class="gatsby-highlight">
+      <pre class="language-javascript"><code><span class="token comment">/**
+ * luhn check algorightm
+ * @param {string} input - card NO
+ * @returns {boolean} return true if input is valid, otherwise return false
+ */</span>
+<span class="token keyword">function</span> <span class="token function">luhnCheck</span><span class="token punctuation">(</span>input<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">var</span> sum <span class="token operator">=</span> <span class="token number">0</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">var</span> i <span class="token operator">=</span> input<span class="token punctuation">.</span>length <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">>=</span> <span class="token number">0</span><span class="token punctuation">;</span> <span class="token operator">--</span>i<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">var</span> digit <span class="token operator">=</span> <span class="token function">parseInt</span><span class="token punctuation">(</span>input<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token punctuation">(</span>i <span class="token operator">%</span> <span class="token number">2</span> <span class="token operator">===</span> <span class="token number">0</span> <span class="token operator">?</span> <span class="token number">2</span> <span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">)</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>digit <span class="token operator">&lt;=</span> <span class="token number">9</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            sum <span class="token operator">+=</span> digit   
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+            sum <span class="token operator">+=</span> <span class="token punctuation">(</span>digit <span class="token operator">%</span> <span class="token number">10</span> <span class="token operator">+</span> <span class="token function">parseInt</span><span class="token punctuation">(</span>digit <span class="token operator">/</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> sum <span class="token operator">%</span> <span class="token number">10</span> <span class="token operator">===</span> <span class="token number">0</span>
+<span class="token punctuation">}</span>
+</code></pre>
+      </div>
+<p>上面的校验算法仅校验卡号是否符合规则，实际应用还需要根据具体场景校验卡号的开头位和长度等，下面是银联卡号完整的校验函数：</p>
+<div class="gatsby-highlight">
+      <pre class="language-javascript"><code><span class="token comment">// return true if input is a valid bank card no, otherwise return false</span>
+<span class="token keyword">function</span> <span class="token function">checkBankCardNo</span> <span class="token punctuation">(</span>input<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token regex">/^62(\d{14}|\d{17})$/</span><span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span>input<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token function">luhnCheck</span><span class="token punctuation">(</span>input<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre>
+      </div>
+<p>上面两段代码的在线示例：<a href="https://runkit.com/whinc/luhn-check-algorithm">https://runkit.com/whinc/luhn-check-algorithm</a></p>
+<p>参考：</p>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Payment_card_number">Payment card number | wikipedia</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Luhn_algorithm">Luhn algorithm | wikipedia</a></li>
+<li><a href="https://www.zhihu.com/question/20880750#answer-4771564">银行卡号各个数字是什么含义？ | 知乎</a></li>
+</ul>
+<h2>2. 身份证号（ID Card Number）</h2>
+<p>中国居民身份证</p>
+<p>
+  <a
+    class="gatsby-resp-image-link"
+    href="/static/id-card-example-144967b174fb520123a7da549344d982-28feb.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+  
+  <span
+    class="gatsby-resp-image-wrapper"
+    style="position: relative; display: block; ; max-width: 299px; margin-left: auto; margin-right: auto;"
+  >
+    <span
+      class="gatsby-resp-image-background-image"
+      style="padding-bottom: 69.23076923076923%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAOCAYAAAAvxDzwAAAACXBIWXMAAAsSAAALEgHS3X78AAADtklEQVQ4yyWT3U+TZxjGe+6/sPP9A1uy7WjZEg+2mOxg7mTIyviSyVSELFswCs7NgxnFIWbOgOJAsIVWwEILbcf3xwot/aCUlpfyvm/ffrxtKS0IKFl+e3AHd57keXL/cuW6rsdguvk5tq4fsHU2Y3/YhL2jHntbLeN3a3HdrcLdVomrrQJ3ew3O+xfEfY14r2H09++xtV/A/qAeR/ePjPTc5ElrBYaxZz8Tye4SzRXZzJeIZwskUln0RJKirFDUNPayOvu5LKV0mh1dJ5kvEC/uEX91iHx0hHp0SOL1MfPzbgyu57+xni3i3swwK6WY9wdxTc+yMDXJfiJBMSmAelpAM5QEOJfR0XIFpPwusRPw3j7KwSHK0Rv+cZgw9N9vYU3fZWY7w9x2ikBCZXUjQiwcpiDLFBWFkoCW0kl2hdpCLkcoEmP8wS+Y689g7+1B2t0n8eYYm+kJhrbmBnzpAo+9Kt2eTZyeRZaiG0yEFIbcyyxMTlHMpCjmsxQ0laJQ5LVbCHX+ivTouoB+hW89hHr8L+OmLgym2z/hT+8wGtUY30ywGNvA5fOxuB4hfDLCgnAghCzJlFJJdgQwNjGAo/USc7ca6Dj7MYtO21sPl0d7ToDNBFJ53FtpFuQ03sgGcyt+AutRIsEgsVCIsM+PKsVFQAr5Ygl5wow+1M3avav8fflL1kQY6sERTrNQOHCrkVUtR/+qysiaikME0j9opb+vj77HXQyIsfb8xeigCcewldVVH0lZQhcqfVfrcLfWE1NlAXzNgkUAr9VXCaBOIJnDL6piF8AR+zgjQ0M4X7wguuyhoCpkt7fQlW0RSoYlX5ixrg4Cdy5y6bNPGLS72No7YNbSiaG3pQGvkhbADAFVY8kfYt6zwsL0NIGZaZRggB0tQUbe5lU+j7n7ER+cPsup6xberbvHqXc+5cP33sdsG8b09CGGpy1NrIi6BNUUa2qSmJZkS1RHliRS4XX0SARd2kSPS+SEQu/CPI6xEay+EKbpFaFukvEpF3MiwJc9AnjeaGQxKnPH7qexz0PrsJeWAQ+DzmV87glG+59j7T3x0MzLkxE2WE88HrTwzDrE6Mw8AVkjmMnh6BXAlou1ArjNUiyOJ6bgi8ZFcSWR7hqK348WCKKJomvR6P8jCp8Qd/GAn0h4g+DGFl6xsyIlMP/ZLn5K4xfUVBix3G7iRtN3VFZUUPWNkcrycmrPlXG+7Guaa6qoKz/HlepKcZbRWPUtVyqNNFRXc+Ny/dudP641YTz9Ef8BNUGD2nyZONcAAAAASUVORK5CYII='); background-size: cover; display: block;"
+    >
+      <img
+        class="gatsby-resp-image-image"
+        style="width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px white;"
+        alt="id card example"
+        title=""
+        src="/static/id-card-example-144967b174fb520123a7da549344d982-28feb.png"
+        srcset="/static/id-card-example-144967b174fb520123a7da549344d982-58d0d.png 148w,
+/static/id-card-example-144967b174fb520123a7da549344d982-bd2b0.png 295w,
+/static/id-card-example-144967b174fb520123a7da549344d982-28feb.png 299w"
+        sizes="(max-width: 299px) 100vw, 299px"
+      />
+    </span>
+  </span>
+  
+  </a>
+    </p>
+<blockquote>
+<p>身份证号：<strong>11204416541220243X</strong></p>
+</blockquote>
+<h3>2.1 卡号组成</h3>
+<p>身份证号码一共有18位数字，各位数字代表的含义：</p>
+<ul>
+<li>第<code>1,2</code>位数字表示：所在省份的代码； </li>
+<li>第<code>3,4</code>位数字表示：所在城市的代码； </li>
+<li>第<code>5,6</code>位数字表示：所在区县的代码；</li>
+<li>第<code>7-14</code>位数字表示：出生年、月、日； </li>
+<li>第<code>15,16</code>位数字表示：所在地的派出所的代码；</li>
+<li>第<code>17</code>位数字表示性别：奇数表示男性，偶数表示女性； </li>
+<li>第<code>18</code>位数字是校检码：根据前面十七位数字码，按照ISO 7064:1983.MOD 11-2校验码计算出来的校验码，取值 0-10（10 用 X 表示）。</li>
+</ul>
+<div class="gatsby-highlight">
+      <pre class="language-none"><code>     /-省份代码      /-出生年月日(YYYYMMDD）
+    /  /-城市代码   /  /-所在地派出所代码
+   /  /  /-区县代码/  / /-性别(奇-男，偶-女)
+__/__/__/________/__/_/_/-校验位
+11 20 44 16541220 24 3 X</code></pre>
+      </div>
+<p><strong>省市区(县)代码</strong></p>
+<p>我们把身份证前六位地址码码，按ABCDEF表示。</p>
+<p>AB 表示身份证主人所在的省(直辖市、自治区、特别行政区)代码。</p>
+<div class="gatsby-highlight">
+      <pre class="language-none"><code>11-15 京 津 冀 晋 蒙
+21-23 辽 吉 黑
+31-37 沪 苏 浙 皖 闽 赣 鲁
+41-46 豫 鄂 湘 粤 桂 琼
+50-54 渝 川 贵 云 藏
+61-65 陕 甘 青 宁 新
+81-82 港 澳</code></pre>
+      </div>
+<p>CD 表示地区代码（地级），省的城市代码从省会开始排，只有地级城市有独立的城市代码，而县级市没有。</p>
+<p>EF 表示为县区代码（市辖区、郊区、郊县、县级市）。</p>
+<p>例如，广东省深圳市南山区，对应的身份证前 6 位是<code>440305</code></p>
+<p>完整的全国省市区（县）代码可以参考中华人民共和国国家统计局<a href="http://www.stats.gov.cn/tjsj/tjbz/xzqhdm/201703/t20170310_1471429.html">最新县及县以上行政区划代码（截止2016年7月31日）</a>。</p>
+<p><strong>出生日期</strong></p>
+<p>按照格式<code>YYYYMMDD</code>表示，例如公历一九九一年一月一日出生对应的日期为<code>19910101</code></p>
+<p><strong>派出所代码</strong></p>
+<p>暂未查到官方的派出所代码出处，如果你知道，恳请在评论里告诉我。</p>
+<h3>2.2 身份证校验</h3>
+<p>身份证号最后一位使用ISO 7064:1983.MOD 11-2算法得出，其算法很简单，一句话描述：将每位数字与其对应的权重的乘积之和模11后查表。具体的计算过程见下面：</p>
+<p><strong>第一步：计算权重之和</strong></p>
+<p>每位数字拥有不同的权重<code>Wi</code>，其计算方法如下：</p>
+<div class="gatsby-highlight">
+      <pre class="language-none"><code>c = ∑(ai·Wi) mod 11, i=(1, 18], i ∈ N</code></pre>
+      </div>
+<p>公式说明：
+<code>i</code>:表示号码字符从右至左（包括校验码在内）的位置序号，最右侧数字 i 为 1，计算时不包含最侧的校验位；
+<code>ai</code>:表示第<code>i</code>位置上的号码字符值；
+<code>Wi</code>:示第<code>i</code>位置上的加权因子，其数值依据公式<code>Wi=2^(i-1）mod 11</code>计算得出。 </p>
+<p>由于身份证号固定 18 位，可以预先计算出所有权重值，后续查表加快校验过程。</p>
+<table>
+<thead>
+<tr>
+<th>i</th>
+<th>18</th>
+<th>17</th>
+<th>16</th>
+<th>15</th>
+<th>14</th>
+<th>13</th>
+<th>12</th>
+<th>11</th>
+<th>10</th>
+<th>9</th>
+<th>8</th>
+<th>7</th>
+<th>6</th>
+<th>5</th>
+<th>4</th>
+<th>3</th>
+<th>2</th>
+<th>1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Wi</td>
+<td>7</td>
+<td>9</td>
+<td>10</td>
+<td>5</td>
+<td>8</td>
+<td>4</td>
+<td>2</td>
+<td>1</td>
+<td>6</td>
+<td>3</td>
+<td>7</td>
+<td>9</td>
+<td>10</td>
+<td>5</td>
+<td>8</td>
+<td>4</td>
+<td>2</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p><strong>第二步：将上一步结果模 11 后查表</strong></p>
+<p>计算出<code>c</code>后，根据下表查出对应的校验码：</p>
+<table>
+<thead>
+<tr>
+<th>j</th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+<th>8</th>
+<th>9</th>
+<th>10</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Q</td>
+<td>1</td>
+<td>0</td>
+<td>X</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+<p>上面的表格是通过下面公式计算出来的：</p>
+<div class="gatsby-highlight">
+      <pre class="language-none"><code>Q = (12-j) mod 11, j=[0, 10], j ∈ N</code></pre>
+      </div>
+<p>算法的 JavaScript 实现如下：</p>
+<div class="gatsby-highlight">
+      <pre class="language-javascript"><code><span class="token comment">/**
+ * Check input ID card no. is valid or not
+ * @param {string} input - ID card no.
+ * @returns return true if input card no. is valid, otherwise return false 
+ */</span>
+<span class="token keyword">function</span> <span class="token function">checkIDCardNo</span><span class="token punctuation">(</span>input<span class="token punctuation">)</span>  <span class="token punctuation">{</span>
+    <span class="token keyword">var</span> sum <span class="token operator">=</span> <span class="token number">0</span>
+    <span class="token keyword">var</span> W <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">7</span><span class="token punctuation">,</span> <span class="token number">9</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">,</span> <span class="token number">9</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">]</span>
+    <span class="token keyword">var</span> Q <span class="token operator">=</span> <span class="token string">'10X97865432'</span>
+    
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">var</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> input<span class="token punctuation">.</span>length <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        sum <span class="token operator">+=</span> input<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">*</span> W<span class="token punctuation">[</span>i<span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token keyword">return</span> Q<span class="token punctuation">[</span>sum <span class="token operator">%</span> <span class="token number">11</span><span class="token punctuation">]</span> <span class="token operator">===</span> input<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+      </div>
+<p>上面的校验算法仅身份证号是否符合 MOD 11 校验规则，实际应用还需要校验卡号的长度和类型，下面是身份证号完整的校验函数：</p>
+<div class="gatsby-highlight">
+      <pre class="language-javascript"><code><span class="token comment">// return true if input is a valid ID card no., otherwise return false</span>
+<span class="token keyword">function</span> <span class="token function">checkIDCardNo2</span> <span class="token punctuation">(</span>input<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token regex">/^\d{17}(\d|X)$/</span><span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span>input<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token function">checkIDCardNo</span><span class="token punctuation">(</span>input<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre>
+      </div>
+<p>上面两段代码的在线示例：<a href="https://runkit.com/whinc/5a31213aeb0c1a0011c3af56">https://runkit.com/whinc/5a31213aeb0c1a0011c3af56</a></p>
+<p>参考：</p>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Resident_Identity_Card">Resident Identity Card | wikipedia</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Resident_Identity_Card#Identity_card_number">Identity Card Number | wikipeida</a></li>
+</ul>
+<h2>3 手机号（Phone Number）</h2>
+<p>中国手机号示例：<code>15975383481</code></p>
+<blockquote>
+<p>电话号码分座机号和移动手机号，二者规则不同，这里只讨论移动手机号</p>
+</blockquote>
+<h3>3.1 手机号组成</h3>
+<p>中国使用的手机号码为11位，使用 MDN 结构<code>CC + MAC + H0 H1 H2 H3 + ABCD</code>，各字段含义如下：</p>
+<p><code>CC</code>：国家码
+<code>MAC</code>：移动接入码，用于区分运营商
+<code>H0H1H2H3</code>：HLR(Home Location Register) 归属识别码，由运营商统一分配，每个移动运营商会为全国的地级市编上一个四位数代码，用于识别手机归属地
+<code>ABCD</code>：移动用户号，由各 HLR 自行分配，用于区分同一地区不同用户</p>
+<div class="gatsby-highlight">
+      <pre class="language-none"><code>     /-CC
+    /   /-MAC
+   /   /    /-HLR
+__/___/____/____/-ABCD
+86 134 1234 1234</code></pre>
+      </div>
+<p>中国大陆号码开头的含义及说明（不一定完整，仅作了解）：</p>
+<table>
+<thead>
+<tr>
+<th>开头</th>
+<th>含义</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>10</code></td>
+<td>电信服务号</td>
+<td>10010中国联通服务中心，10050中国铁通服务中心，10060中国网通服务中心，10070中国卫通服务中心，10086中国移动服务中心等。</td>
+</tr>
+<tr>
+<td><code>11</code></td>
+<td>特种服务号</td>
+<td>如110匪警，111电信内部测试，112报修，113、115国内人工长途挂号，114查号台，116国内人工长途查询，117报时，119火警等。</td>
+</tr>
+<tr>
+<td><code>12</code></td>
+<td>特殊民用号</td>
+<td>如120（医院），121（天气预报），122交通事故告警，12312保护知识产权举报中心，12315消费投诉热线，12319城建服务，12348法律咨询，12358价格举报中心，12365质量监督，12366纳税服务，12369环境保护投诉。</td>
+</tr>
+<tr>
+<td><code>13</code></td>
+<td>通信号码段</td>
+<td>130-133 归属中国联通，134-139 归属中国移动</td>
+</tr>
+<tr>
+<td><code>14</code></td>
+<td>.</td>
+<td>.</td>
+</tr>
+<tr>
+<td><code>15</code></td>
+<td>通信号码段</td>
+<td>153 归属中国联通，158-159 归属中国移动</td>
+</tr>
+<tr>
+<td><code>16</code></td>
+<td>声讯类号码</td>
+<td>如160中国电信工人信息服务接入码，166务，167吉通计算机互联网业务接入码，168声讯服务，中国电信公众多媒体网接入码等。</td>
+</tr>
+<tr>
+<td><code>17</code></td>
+<td>长途电话服务</td>
+<td>如170国内长途全自动话费查询台，173国内立接制长途半自动挂号台，176国内长途半自动查询台，177国内长途半自动班长台，179 IP语音服务接入码等。</td>
+</tr>
+<tr>
+<td><code>18</code></td>
+<td>通信号码段，服务号</td>
+<td>如180邮政服务，184邮政编码查询接入码，185国家邮政局电话信息服务接入码，186移动服务中心，188固定电话交费台，189中国电信业务受理特服台等。</td>
+</tr>
+<tr>
+<td><code>19</code></td>
+<td>寻呼接入</td>
+<td>191联通无线电人工寻呼接入码，192联通无线电自动寻呼接入码等等。</td>
+</tr>
+<tr>
+<td><code>20</code>
+,
+<code>30</code></td>
+<td>电话卡服务</td>
+<td></td>
+</tr>
+<tr>
+<td><code>8</code>
+,
+<code>9</code></td>
+<td>电信及民用服务号</td>
+<td>95501深圳发展银行，95502永安财产保险，95505天安保险，95508广州发展银行</td>
+</tr>
+</tbody>
+</table>
+<h3>3.2 手机号的校验</h3>
+<p>根据上面表格整理的号码含义，可制定下面校验规则：</p>
+<ol>
+<li>号码长度为 11 位</li>
+<li>号码首位是<code>1</code></li>
+<li>
+<p>号码的第 2 位可以是<code>3,4,5,7,8</code></p>
+<div class="gatsby-highlight">
+      <pre class="language-javascript"><code><span class="token comment">/**</span>
+</code></pre>
+      </div>
+</li>
+<li>check is input phone no. is valid</li>
+<li>@param {string} input - input phone no.</li>
+<li>
+<p>@returns return true if input is a valid phone no., otherwise return false
+*/
+function checkPhoneNo(input) {
+return /^1<a href="">3|4|5|7|8</a>\d{8}$/.test(input)
+}</p>
+<div class="gatsby-highlight">
+      <pre class="language-none"><code></code></pre>
+      </div>
+</li>
+</ol>
+<p>上面代码的在线示例：<a href="https://runkit.com/whinc/5a3274f8c8531200128328a7">https://runkit.com/whinc/5a3274f8c8531200128328a7</a></p>
+<p>参考</p>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Telephone_numbers_in_China">Telephone numbers in China | wikipedia</a></li>
+<li><a href="http://baike.sogou.com/v23265397.htm?fromTitle=%E6%89%8B%E6%9C%BA%E5%8F%B7%E7%A0%81">手机号码 | 搜狗百科</a></li>
+<li><a href="http://www.360doc.com/content/12/0620/01/5733130_219320179.shtml">手机、电话号码编码组成及号段分配</a></li>
+</ul>
+<h2>4. 小结</h2>
+<p>本文总结了常见的银行卡号、身份证号和手机号的组成及校验方法，并提供了完整的示例代码。</p></div><hr style="margin-bottom:1.75rem;" data-reactid="9"/><div style="display:flex;margin-bottom:4.375rem;" data-reactid="10"><img src="data:image/jpeg;base64,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" alt="Kyle Mathews" style="margin-right:0.875rem;margin-bottom:0;width:3.5rem;height:3.5rem;" data-reactid="11"/><p data-reactid="12"><!-- react-text: 13 -->Written by <!-- /react-text --><strong data-reactid="14">Kyle Mathews</strong><!-- react-text: 15 --> who lives and works in San Francisco building useful things.<!-- /react-text --><!-- react-text: 16 --> <!-- /react-text --><a href="https://twitter.com/kylemathews" data-reactid="17">You should follow him on Twitter</a></p></div><ul style="display:flex;flex-wrap:wrap;justify-content:space-between;list-style:none;padding:0;" data-reactid="18"><li data-reactid="19"><a rel="prev" href="/blog/react/react-ui-lib-theme-design/" data-reactid="20"><!-- react-text: 21 -->← <!-- /react-text --><!-- react-text: 22 -->React组件库主题设计<!-- /react-text --></a></li></ul></div><span style="display:block;clear:both;" data-reactid="23"> </span></div></div><script id="webpack-manifest">/*<![CDATA[*/window.webpackManifest={"231608221292675":"app-a2eb0ba157d6fa4e8841.js","99219681209289":"component---node-modules-gatsby-plugin-offline-app-shell-js-5c4c5a0f7af9dc69d6d7.js","107818501498521":"component---src-templates-blog-post-js-443b4e797689934d1548.js","35783957827783":"component---src-pages-index-js-51039b9bbfc98abe9adb.js","60335399758886":"path----557518bd178906f8d58a.js","210333531512890":"path---offline-plugin-app-shell-fallback-a0e39f21c11f6a62c5ab.js","123587411395633":"path---common-introduction-to-phone-card-id-no-28801bbdbe28e5240047.js","182731201813365":"path---react-react-ui-lib-theme-design-0ce9106964014e740813.js","271790980202200":"path---react-introduction-to-redux-1cde2552464638cde25b.js","241246743303109":"path---ecma-script-implematiation-of-promise-017e2c8ac8b94331bf3c.js","142629428675168":"path---index-f97ce80c5911ed80caf2.js","114276838955818":"component---src-layouts-index-js-58b31e5739a45f38ba88.js"}/*]]>*/</script><script>
+  
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'undefined', 'auto');
+  </script><script>/*<![CDATA[*/!function(e,t,r){function n(){for(;d[0]&&"loaded"==d[0][f];)c=d.shift(),c[o]=!i.parentNode.insertBefore(c,i)}for(var s,a,c,d=[],i=e.scripts[0],o="onreadystatechange",f="readyState";s=r.shift();)a=e.createElement(t),"async"in i?(a.async=!1,e.head.appendChild(a)):i[f]?(d.push(a),a[o]=n):e.write("<"+t+' src="'+s+'" defer></'+t+">"),a.src=s}(document,"script",["/blog/commons-3cf304937523a964e309.js","/blog/app-a2eb0ba157d6fa4e8841.js","/blog/path---common-introduction-to-phone-card-id-no-28801bbdbe28e5240047.js","/blog/component---src-templates-blog-post-js-443b4e797689934d1548.js","/blog/component---src-layouts-index-js-58b31e5739a45f38ba88.js"])/*]]>*/</script></body></html>

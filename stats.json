@@ -1,9 +1,5 @@
 {
   "assetsByChunkName": {
-    "path---my-second-post": [
-      "path---my-second-post-9768c9323cb001e6424c.js",
-      "path---my-second-post-9768c9323cb001e6424c.js.map"
-    ],
     "component---src-pages-index-js": [
       "component---src-pages-index-js-51039b9bbfc98abe9adb.js",
       "component---src-pages-index-js-51039b9bbfc98abe9adb.js.map"
@@ -24,9 +20,13 @@
       "component---src-layouts-index-js-58b31e5739a45f38ba88.js",
       "component---src-layouts-index-js-58b31e5739a45f38ba88.js.map"
     ],
+    "path---common-introduction-to-phone-card-id-no": [
+      "path---common-introduction-to-phone-card-id-no-28801bbdbe28e5240047.js",
+      "path---common-introduction-to-phone-card-id-no-28801bbdbe28e5240047.js.map"
+    ],
     "path---index": [
-      "path---index-b005545745a04eba37e2.js",
-      "path---index-b005545745a04eba37e2.js.map"
+      "path---index-f97ce80c5911ed80caf2.js",
+      "path---index-f97ce80c5911ed80caf2.js.map"
     ],
     "commons": [
       "commons-3cf304937523a964e309.js",
@@ -35,22 +35,26 @@
       "build-js-styles.css.map"
     ],
     "path---react-react-ui-lib-theme-design": [
-      "path---react-react-ui-lib-theme-design-d78f49cd86b9008f0e7a.js",
-      "path---react-react-ui-lib-theme-design-d78f49cd86b9008f0e7a.js.map"
+      "path---react-react-ui-lib-theme-design-0ce9106964014e740813.js",
+      "path---react-react-ui-lib-theme-design-0ce9106964014e740813.js.map"
     ],
     "path---offline-plugin-app-shell-fallback": [
       "path---offline-plugin-app-shell-fallback-a0e39f21c11f6a62c5ab.js",
       "path---offline-plugin-app-shell-fallback-a0e39f21c11f6a62c5ab.js.map"
     ],
     "app": [
-      "app-9f208c8e93b5ff271c6e.js",
+      "app-a2eb0ba157d6fa4e8841.js",
       "build-js-styles.css",
-      "app-9f208c8e93b5ff271c6e.js.map",
+      "app-a2eb0ba157d6fa4e8841.js.map",
       "build-js-styles.css.map"
     ],
+    "path---ecma-script-implematiation-of-promise": [
+      "path---ecma-script-implematiation-of-promise-017e2c8ac8b94331bf3c.js",
+      "path---ecma-script-implematiation-of-promise-017e2c8ac8b94331bf3c.js.map"
+    ],
     "path---react-introduction-to-redux": [
-      "path---react-introduction-to-redux-42ffebc26d5e9e9b7aa1.js",
-      "path---react-introduction-to-redux-42ffebc26d5e9e9b7aa1.js.map"
+      "path---react-introduction-to-redux-1cde2552464638cde25b.js",
+      "path---react-introduction-to-redux-1cde2552464638cde25b.js.map"
     ]
   }
 }
